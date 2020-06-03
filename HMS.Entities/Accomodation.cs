@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace HMS.Entities
 {
-    public class AccomodationType
+    public  class Accomodation
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public int AccomodationPackageID { get; set; }
+        public AccomodationPackage AccomodationPackage { get; set; }
         public string Description { get; set; }
     }
 }
