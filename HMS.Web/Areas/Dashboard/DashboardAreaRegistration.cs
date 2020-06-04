@@ -17,7 +17,7 @@ namespace HMS.Web.Areas.Dashboard
             context.MapRoute(
                 "Dashboard_default",
                 "Dashboard/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller= "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

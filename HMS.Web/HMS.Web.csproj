@@ -234,6 +234,7 @@
     <Content Include="Areas\Dashboard\Content\dist\img\boxed-bg.png" />
     <Content Include="Areas\Dashboard\Content\dist\img\credit\american-express.png" />
     <Content Include="Areas\Dashboard\Content\dist\img\credit\cirrus.png" />
+    <Content Include="Areas\Dashboard\Content\dist\img\credit\logo.png" />
     <Content Include="Areas\Dashboard\Content\dist\img\credit\mastercard.png" />
     <Content Include="Areas\Dashboard\Content\dist\img\credit\mestro.png" />
     <Content Include="Areas\Dashboard\Content\dist\img\credit\paypal.png" />
@@ -904,6 +905,7 @@
     <Content Include="Areas\Dashboard\Views\Shared\_Sidebar.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared\_Navbar.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\_JsFile.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
