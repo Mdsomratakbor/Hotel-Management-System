@@ -13,5 +13,9 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         {
             return View();
         }
+        public PartialViewResult ListingView()
+        {
+            return PartialView();
+        }
     }
 }
