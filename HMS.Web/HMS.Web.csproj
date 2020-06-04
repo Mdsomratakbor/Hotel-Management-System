@@ -908,6 +908,7 @@
     <Content Include="Areas\Dashboard\Views\Shared\_Footer.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared\_JsFile.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationType\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\AccomodationType\_Listing.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -975,6 +976,10 @@
     <ProjectReference Include="..\HMS.Entities\HMS.Entities.csproj">
       <Project>{677D9125-1531-4360-9782-2DF8EB3C0A5C}</Project>
       <Name>HMS.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HMS.Services\HMS.Services.csproj">
+      <Project>{E1B915C8-4393-4D38-83D2-066CAC39B55B}</Project>
+      <Name>HMS.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
