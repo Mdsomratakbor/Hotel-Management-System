@@ -20,5 +20,10 @@ namespace HMS.Services
         {
             return _Context.AccomodationTypes.ToList();
         }
+        public bool SaveAccomodationType(AccomodationType model)
+        {
+            _Context.AccomodationTypes.Add(model);
+            return _Context.SaveChanges()>0;
+        }
     }
 }

@@ -910,6 +910,7 @@
     <Content Include="Areas\Dashboard\Views\Shared\_JsFile.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationType\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationType\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\AccomodationType\_Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
