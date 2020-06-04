@@ -16,6 +16,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         public AccomodationTypeController()
         {
            _AccomodationTypeService = new AccomodationTypeService();
+            _AccomodationType = new AccomodationType();
         }
         // GET: Dashboard/AccomodationType
         public ActionResult Index()
@@ -52,6 +53,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 else
                 {
                     message = "Please enter valid data!!";
+                   
                 }
                          
             }
@@ -66,7 +68,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }                
             else
             {
-                result.Data = new { Success = true, Meessage = message };
+                result.Data = new { Success = false, Message = message };
             }
             return result;
 
