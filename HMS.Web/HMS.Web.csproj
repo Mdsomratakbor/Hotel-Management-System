@@ -902,6 +902,8 @@
     <Content Include="Areas\Dashboard\Content\dist\js\adminlte.js.map" />
     <Content Include="Areas\Dashboard\Content\dist\js\adminlte.min.js.map" />
     <Content Include="Areas\Dashboard\Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\_Navbar.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\_Footer.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -993,7 +995,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1054</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1054/</IISUrl>
+          <IISUrl>http://localhost:10054/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
