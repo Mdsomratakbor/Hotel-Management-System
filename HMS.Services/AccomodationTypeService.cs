@@ -11,9 +11,9 @@ namespace HMS.Services
     public class AccomodationTypeService
     {
         private HMSContext _Context;
-        public AccomodationTypeService(HMSContext _HMSContext)
+        public AccomodationTypeService()
         {
-            this._Context = _HMSContext;
+            _Context = new HMSContext();
         }
 
         public List<AccomodationType> GetAllAccomodationType()

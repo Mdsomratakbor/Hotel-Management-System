@@ -1,4 +1,5 @@
 ﻿using HMS.Services;
+using HMS.Web.Areas.Dashboard.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace HMS.Web.Areas.Dashboard.Controllers
     public class AccomodationTypeController : Controller
     {
         private AccomodationTypeService _AccomodationTypeService;
-        public AccomodationTypeController(AccomodationTypeService _AccomodationTypeService)
+        public AccomodationTypeController()
         {
-            this._AccomodationTypeService = _AccomodationTypeService;
+           _AccomodationTypeService = new AccomodationTypeService();
         }
         // GET: Dashboard/AccomodationType
         public ActionResult Index()
@@ -21,8 +22,9 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         }
         public PartialViewResult Listing()
         {
-            var accomodationType = _AccomodationTypeService.GetAllAccomodationType();
-            return PartialView("_Listing");
+            AccomodationTypeListingModel model = new AccomodationTypeListingModel();
+            model.AccomodationTypes = _AccomodationTypeService.GetAllAccomodationType(); ;
+            return PartialView("_Listing",model);
         }
     }
 }
