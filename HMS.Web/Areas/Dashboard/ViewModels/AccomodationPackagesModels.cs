@@ -5,7 +5,11 @@ using System.Web;
 
 namespace HMS.Web.Areas.Dashboard.ViewModels
 {
-    public class AccomodationPackagesModels
+    public class AccomodationPackagesListingModel
     {
+    }
+    public class AccomodationPackagesModel
+    {
+
     }
 }
