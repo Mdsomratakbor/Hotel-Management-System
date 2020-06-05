@@ -1,7 +1,7 @@
 ﻿@model HMS.Web.Areas.Dashboard.ViewModels.AccomodationTypeListingModel
 @{var row = 0; }
 
-<div style="height: 500px; overflow: auto;  overflow-y: scroll;" >
+<div style="height: 500px; overflow: auto;  overflow-y: scroll;">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,7 +22,7 @@
                         <td>@data.Name</td>
                         <td>@data.Description</td>
                         <td>
-                            <button class="btn btn-success btn-sm"><i class="far fa-edit"></i></button>
+                            <button data-href="@Url.Action("Action", "AccomodationType", new { id = data.ID })" class="btn btn-success btn-sm"><i class="far fa-edit"></i></button>
                             <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
@@ -43,4 +43,3 @@
         </tbody>
     </table>
 </div>
-   

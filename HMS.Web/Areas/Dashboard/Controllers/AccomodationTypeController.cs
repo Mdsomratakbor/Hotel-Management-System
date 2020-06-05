@@ -30,8 +30,9 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             return PartialView("_Listing",model);
         }
         [HttpGet]
-        public PartialViewResult Action()
+        public PartialViewResult Action(int? id)
         {
+              _AccomodationTypeService.GetAccomodationById(id.Value);
             return PartialView("_Action");
         }
         [HttpPost]
