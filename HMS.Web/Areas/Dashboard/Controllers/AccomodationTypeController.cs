@@ -23,11 +23,15 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         {
             return View();
         }
-        public PartialViewResult Listing(string searchTearm)
+        public PartialViewResult Listing(string searchTearm, int? pageNo, int pageSize)
         {
             AccomodationTypeListingModel model = new AccomodationTypeListingModel();
-            model.AccomodationTypes = _AccomodationTypeService.GetAllAccomodationType(searchTearm);
+            model.AccomodationTypes = _AccomodationTypeService.GetAllAccomodationType(searchTearm, pageNo.Value, pageSize);
+            int totalItems = _AccomodationTypeService.TotalItemCount(searchTearm);
+            model.Pager = new Pager(totalItems, pageNo, pageSize);
             model.SearchTerm = searchTearm;
+            model.PageNo = pageNo.Value;
+            model.PageSize = pageSize;
             return PartialView("_Listing",model);
         }
         [HttpGet]

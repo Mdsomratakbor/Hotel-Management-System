@@ -1,37 +1,49 @@
 ﻿@model HMS.Web.Areas.Dashboard.ViewModels.AccomodationTypeListingModel
 @{var row = 0; }
-   <!-- Content Header (Page header) -->
+   @*<!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-12">
-                <h1 class="m-0 text-dark">Accomodation Types</h1>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-    <hr />
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="search by Accomodation Type Name" aria-label="Accomodation Type Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm">
-        <div class="input-group-append">
-            <button data-href="@Url.Action("Listing", "AccomodationType")" id="btnSearch" class="btn btn-outline-secondary" type="button"><i class="fa fa-search"></i> Search</button>
-            <button data-href="@Url.Action("Listing", "AccomodationType")" id="btnReset" class="btn btn-outline-secondary" type="button"><i class="fas fa-sync"></i> Reset</button>
-            <button data-href="@Url.Action("Action", "AccomodationType")" class="data-btn btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Create</button>
-        </div>
-    </div>
+       
+    </div><!-- /.container-fluid --> 
 </div>
-<!-- /.content-header -->
-<div style="height: 500px; overflow: auto;  overflow-y: scroll;">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#SL</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.AccomodationTypes != null && Model.AccomodationTypes.Count > 0)
+<!-- /.content-header -->*@
+
+    <div class="card">
+        <div class="card-header">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h3 class="m-0 text-dark">Accomodation Types</h3>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+            <div class="input-group">
+                <select id="pageSize">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <input type="text" class="form-control" placeholder="search by Accomodation Type Name" aria-label="Accomodation Type Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm" autocomplete="off">
+                <div class="input-group-append">
+                    <button data-href="@Url.Action("Listing", "AccomodationType")" id="btnSearch" class="btn btn-outline-warning btn-sm" type="button"><i class="fa fa-search"></i></button>
+                    <button data-href="@Url.Action("Listing", "AccomodationType")" id="btnReset" class="btn btn-outline-primary btn-sm btn-sm" type="button"><i class="fas fa-sync"></i></button>
+                    <button data-href="@Url.Action("Action", "AccomodationType")" class="data-btn btn btn-outline-success btn-sm btn-sm" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div style="height: 300px; overflow: auto;">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#SL</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.AccomodationTypes != null && Model.AccomodationTypes.Count > 0)
             {
                 foreach (var data in Model.AccomodationTypes)
                 {
@@ -40,28 +52,41 @@
                         <th scope="row">@row</th>
                         <td>@data.Name</td>
                         <td>@data.Description</td>
-                        <td>
+                        <td width="100">
                             <button data-href="@Url.Action("Action", "AccomodationType", new { id = data.ID })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
                             <button data-href="@Url.Action("Delete", "AccomodationType", new { id = data.ID })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
 
-                }
+                        }
 
-            }
-            else
-            {
-                <tr>
-                    <td colspan="4">
-                        <div class="alert alert-secondary" role="alert">
-                            Sorry! No record exist.
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                    }
+                    else
+                    {
+                    <tr>
+                        <td colspan="4">
+                            <div class="alert alert-secondary" role="alert">
+                                Sorry! No record exist.
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer clearfix">
+            <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">»</a></li>
+            </ul>
+        </div>
+    </div>
+ 
+
 <script>
     $(".data-btn").on('click', function () {
         $.ajax({
@@ -112,7 +137,7 @@
         $.ajax({
             method: 'Get',
             url: $(this).attr('data-href'),
-            data: { searchTearm: searchText }
+            data: { searchTearm: searchText, pageNo:'@Model.PageNo', pageSize:'@Model.PageSize' }
         }).done(function (response) {
             $("#listData").html(response);
         }).fail(function (xhr, ajaxOptions, thrownError) {
@@ -133,4 +158,18 @@
         })
     })
 
+    $("#pageSize").change(function () {
+        var searchText = $("#searchText").val();
+        var pageSize = $("#pageSize").val();
+        $.ajax({
+            method: 'Get',
+            url: '@Url.Action("Action", "AccomodationType")',
+            data: { searchTearm: searchText, pageSize: pageSize }
+        }).done(function (response) {
+            $("#listData").html(response);
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            console.log(thrownError);
+        })
+    })
 </script>

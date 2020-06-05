@@ -16,14 +16,24 @@ namespace HMS.Services
             _Context = new HMSContext();
         }
 
-        public List<AccomodationType> GetAllAccomodationType(string searchTearm)
+        public List<AccomodationType> GetAllAccomodationType(string searchTearm, int? pageNo, int pageSize = 10)
         {
-          var data = _Context.AccomodationTypes.ToList();
-            if (string.IsNullOrEmpty(searchTearm)==false)
+            var data = _Context.AccomodationTypes.ToList();
+            if (string.IsNullOrEmpty(searchTearm) == false)
             {
                 data = data.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower())).ToList();
             }
-            return data;
+            pageNo = !pageNo.HasValue ? pageNo : 1;
+            return data.OrderByDescending(x => x.ID).Skip((pageNo.Value - 1) * pageSize).Take(pageSize).ToList();
+        }
+        public int TotalItemCount(string searchTearm)
+        {
+            var data = _Context.AccomodationTypes.ToList();
+            if (string.IsNullOrEmpty(searchTearm) == false)
+            {
+                data = data.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower())).ToList();
+            }
+            return data.Count;
         }
         public AccomodationType GetAccomodationById(int id)
         {
@@ -32,7 +42,7 @@ namespace HMS.Services
         public bool SaveAccomodationType(AccomodationType model)
         {
             _Context.AccomodationTypes.Add(model);
-            return _Context.SaveChanges()>0;
+            return _Context.SaveChanges() > 0;
         }
         public bool UpdateAccomodationType(AccomodationType model)
         {
