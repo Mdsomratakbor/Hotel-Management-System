@@ -93,5 +93,41 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             return result;
 
         }
+
+        public JsonResult Delete(int id)
+        {
+            JsonResult result = new JsonResult();
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            dynamic message = "";
+            var data = false;
+            try
+            {
+                if (id > 0)
+                {
+                    _AccomodationType = _AccomodationTypeService.GetAccomodationById(id);
+                     data = _AccomodationTypeService.DeleteAccomodationType(_AccomodationType);
+                }
+                else
+                {
+                    message = "Please click valid item";
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            if (data)
+            {
+                message = "Data Delete Successfully !!";
+                result.Data = new { Success = true, Message = message };
+            }
+            else
+            {
+                result.Data = new { Success = false, Message = message };
+            }
+
+            return result;
+        }
+
     }
 }
