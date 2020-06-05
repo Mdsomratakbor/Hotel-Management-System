@@ -29,5 +29,10 @@ namespace HMS.Services
             _Context.AccomodationTypes.Add(model);
             return _Context.SaveChanges()>0;
         }
+        public bool UpdateAccomodationType(AccomodationType model)
+        {
+            _Context.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            return _Context.SaveChanges() > 0;
+        }
     }
 }

@@ -54,10 +54,21 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _AccomodationType.ID = model.ID;
-                    _AccomodationType.Name = model.Name;
-                    _AccomodationType.Description = model.Description;
-                    data = _AccomodationTypeService.SaveAccomodationType(_AccomodationType);
+                    if (model.ID > 0)
+                    {
+                        _AccomodationType = _AccomodationTypeService.GetAccomodationById(model.ID);
+                        _AccomodationType.Name = model.Name;
+                        _AccomodationType.Description = model.Description;
+                        data = _AccomodationTypeService.UpdateAccomodationType(_AccomodationType);
+                    }
+                    else
+                    {
+                        _AccomodationType.ID = model.ID;
+                        _AccomodationType.Name = model.Name;
+                        _AccomodationType.Description = model.Description;
+                        data = _AccomodationTypeService.SaveAccomodationType(_AccomodationType);
+                    }
+                   
                 }
                 else
                 {
