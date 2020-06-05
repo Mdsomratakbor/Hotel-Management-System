@@ -32,8 +32,16 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         [HttpGet]
         public PartialViewResult Action(int? id)
         {
-              _AccomodationTypeService.GetAccomodationById(id.Value);
-            return PartialView("_Action");
+            AccomodationTypeModel model = new AccomodationTypeModel();
+            if (id.HasValue)
+            {
+                _AccomodationType = _AccomodationTypeService.GetAccomodationById(id.Value);
+                model.ID = _AccomodationType.ID;
+                model.Name = _AccomodationType.Name;
+                model.Description = _AccomodationType.Description;
+            }
+
+            return PartialView("_Action",model);
         }
         [HttpPost]
         public JsonResult Action(AccomodationTypeModel model)

@@ -13,7 +13,7 @@
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button"><i class="fa fa-search"></i> Search</button>
             <button class="btn btn-outline-secondary" type="button"><i class="fas fa-sync"></i> Reset</button>
-            <button data-href="@Url.Action("Action", "AccomodationType", new { id = Model.ID })" class="data-btn btn btn-outline-secondary" type="button"  data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Create</button>
+            <button data-href="@Url.Action("Action", "AccomodationType")" class="data-btn btn btn-outline-secondary" type="button"  data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Create</button>
         </div>
     </div>
 </div>
@@ -31,11 +31,12 @@
     </div>
 </div>
 <script>
-    $("#btnCreate").on('click', function () {
+    $(".data-btn").on('click', function () {
         $.ajax({
             method: 'Get',
-            url:'@Url.Action("Action","AccomodationType")'
+            url:$(this).attr('data-href')
         }).done(function (response) {
+            $('#myModal').modal('toggle');
             $("#myModal .modal-dialog").html(response);
         })
     })

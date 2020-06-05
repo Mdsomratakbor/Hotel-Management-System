@@ -1,28 +1,41 @@
 ﻿@model HMS.Web.Areas.Dashboard.ViewModels.AccomodationTypeModel
-<div class="modal-content">
-    <div class="modal-header  bg-gradient-gray-dark">
-        <h5 class="modal-title" id="exampleModalLabel">Create Accomodation Type </h5>
-        <button type="button" class="close btn btn-warning btn-sm" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form id="accomodationForm">
-            <div class="form-group">
-                <label for="Name">Name</label>
-                <input type="text" class="form-control" name="Name" id="Name" placeholder="Enter Accomodation Type Name">
+    @if (Model != null)
+    {
+        <div class="modal-content">
+            <div class="modal-header  bg-gradient-gray-dark">
+                @if (Model.ID > 0)
+                {
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Accomodation Type </h5>
+                }
+                else
+                {
+                    <h5 class="modal-title" id="exampleModalLabel">Create Accomodation Type </h5>
+                }
+
+                <button type="button" class="close btn btn-warning btn-sm" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="form-group">
-                <label for="Description">Description</label>
-                <textarea class="form-control" id="Description" name="Description" rows="3" placeholder="Enter Accomodation Description"></textarea>
+            <div class="modal-body">
+                <form id="accomodationForm">
+                    <input type="hidden" value="@Model.ID" name="ID"/>
+                    <div class="form-group">
+                        <label for="Name">Name</label>
+                        <input type="text" class="form-control" value="@Model.Name" name="Name" id="Name" placeholder="Enter Accomodation Type Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea class="form-control" id="Description" name="Description" rows="3" placeholder="Enter Accomodation Description">@Model.Description</textarea>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnSave">Save</button>
-    </div>
-</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSave">Save</button>
+            </div>
+        </div>
+    }
+
 
 <script>
     $("#btnSave").on('click', function () {
@@ -45,7 +58,6 @@
                 }, 1500)
             }
             else {
-                debugger
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
