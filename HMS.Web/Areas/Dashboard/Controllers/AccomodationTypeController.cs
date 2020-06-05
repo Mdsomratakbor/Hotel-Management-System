@@ -23,10 +23,11 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         {
             return View();
         }
-        public PartialViewResult Listing()
+        public PartialViewResult Listing(string searchTearm)
         {
             AccomodationTypeListingModel model = new AccomodationTypeListingModel();
-            model.AccomodationTypes = _AccomodationTypeService.GetAllAccomodationType(); ;
+            model.AccomodationTypes = _AccomodationTypeService.GetAllAccomodationType(searchTearm);
+            model.SearchTerm = searchTearm;
             return PartialView("_Listing",model);
         }
         [HttpGet]

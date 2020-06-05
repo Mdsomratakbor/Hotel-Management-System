@@ -10,6 +10,8 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     public class AccomodationTypeListingModel
     {
         public List<AccomodationType> AccomodationTypes { get; set; }
+        public string SearchTerm { get; set; }
+        public int PageSize { get; set; }
     }
     public class AccomodationTypeModel
     {
@@ -17,5 +19,6 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+      
     }
 }

@@ -16,9 +16,14 @@ namespace HMS.Services
             _Context = new HMSContext();
         }
 
-        public List<AccomodationType> GetAllAccomodationType()
+        public List<AccomodationType> GetAllAccomodationType(string searchTearm)
         {
-            return _Context.AccomodationTypes.ToList();
+          var data = _Context.AccomodationTypes.ToList();
+            if (string.IsNullOrEmpty(searchTearm)==false)
+            {
+                data = data.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower())).ToList();
+            }
+            return data;
         }
         public AccomodationType GetAccomodationById(int id)
         {
