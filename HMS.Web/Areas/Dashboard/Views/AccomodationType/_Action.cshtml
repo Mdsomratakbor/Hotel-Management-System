@@ -28,7 +28,7 @@
     $("#btnSave").on('click', function () {
         $.ajax({
             method: 'post',
-            url: '@Url.Action("Create","AccomodationType")',
+            url: '@Url.Action("Action","AccomodationType")',
             data: $("#accomodationForm").serialize()
         }).done(function (response) {
             if (response.Success) {

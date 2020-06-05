@@ -30,12 +30,12 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             return PartialView("_Listing",model);
         }
         [HttpGet]
-        public PartialViewResult Create()
+        public PartialViewResult Action()
         {
-            return PartialView("_Create");
+            return PartialView("_Action");
         }
         [HttpPost]
-        public JsonResult Create(AccomodationTypeModel model)
+        public JsonResult Action(AccomodationTypeModel model)
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -62,7 +62,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 message = ex.Message;
             }
             if (data)
-            {
+            { 
                 message = "Data Save Successfully!!";
                 result.Data = new { Success = true, Message = message };
             }                

@@ -34,7 +34,7 @@
     $("#btnCreate").on('click', function () {
         $.ajax({
             method: 'Get',
-            url:'@Url.Action("Create","AccomodationType")'
+            url:'@Url.Action("Action","AccomodationType")'
         }).done(function (response) {
             $("#myModal .modal-dialog").html(response);
         })
