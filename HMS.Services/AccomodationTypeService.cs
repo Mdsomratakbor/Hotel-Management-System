@@ -23,7 +23,7 @@ namespace HMS.Services
             {
                 data = data.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower())).ToList();
             }
-            pageNo = !pageNo.HasValue ? pageNo : 1;
+           
             return data.OrderByDescending(x => x.ID).Skip((pageNo.Value - 1) * pageSize).Take(pageSize).ToList();
         }
         public int TotalItemCount(string searchTearm)
