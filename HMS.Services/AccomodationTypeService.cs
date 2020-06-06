@@ -26,6 +26,10 @@ namespace HMS.Services
            
             return data.OrderByDescending(x => x.ID).Skip((pageNo.Value - 1) * pageSize).Take(pageSize).ToList();
         }
+        public List<AccomodationType> GetAllAccomodationType()
+        {
+            return _Context.AccomodationTypes.ToList();
+        }
         public int TotalItemCount(string searchTearm)
         {
             var data = _Context.AccomodationTypes.ToList();

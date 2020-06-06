@@ -2,6 +2,7 @@
 using HMS.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace HMS.Services
         }
         public List<AccomodationPackage> GetAllAccomodationPackage(string searchTearm, int? pageNo, int pageSize = 10)
         {
-            var data = _Context.AccomodationPackages.ToList();
+            var data = _Context.AccomodationPackages.Include(x=>x.AccomodationType).ToList();
             if (string.IsNullOrEmpty(searchTearm) == false)
             {
                 data = data.Where(x => x.NoOfRoom.ToLower().Contains(searchTearm.ToLower())).ToList();

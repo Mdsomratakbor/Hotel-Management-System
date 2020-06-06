@@ -915,7 +915,7 @@
     <Content Include="Areas\Dashboard\Views\AccomodationType\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationType\_Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationPackages\_Action.cshtml" />
-    <Content Include="Areas\Dashboard\Views\AccomodationPackages\_Listings.cshtml" />
+    <Content Include="Areas\Dashboard\Views\AccomodationPackages\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationPackages\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

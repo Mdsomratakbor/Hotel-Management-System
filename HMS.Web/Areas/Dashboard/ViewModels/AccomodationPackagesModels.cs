@@ -18,7 +18,7 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     {
         public int ID { get; set; }
         public int AccomodationTypeID { get; set; }
-        public AccomodationType AccomodationType { get; set; }
+        public List<AccomodationType> AccomodationType { get; set; }
         public string NoOfRoom { get; set; }
         public decimal FeePerNight { get; set; }
     }
