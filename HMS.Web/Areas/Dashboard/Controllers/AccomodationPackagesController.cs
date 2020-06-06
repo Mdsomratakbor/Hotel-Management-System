@@ -69,6 +69,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                     {
                         _AccomodationPackage = _AccomodationPackagesService.GetAccomodationById(model.ID);
                         _AccomodationPackage.NoOfRoom = model.NoOfRoom;
+                        _AccomodationPackage.Name = model.Name;
                         _AccomodationPackage.FeePerNight = model.FeePerNight;
                         _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;
                         data = _AccomodationPackagesService.UpdateAccomodationType(_AccomodationPackage);
@@ -76,6 +77,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                     else
                     {
                         _AccomodationPackage.ID = model.ID;
+                        _AccomodationPackage.Name = model.Name;
                         _AccomodationPackage.NoOfRoom = model.NoOfRoom;
                         _AccomodationPackage.FeePerNight = model.FeePerNight;
                         _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;

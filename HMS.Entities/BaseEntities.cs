@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HMS.Entities
 {
-    public class AccomodationType : BaseEntities
+    public class BaseEntities
     {
-        public string Description { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

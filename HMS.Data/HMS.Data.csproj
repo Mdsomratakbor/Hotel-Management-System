@@ -69,6 +69,10 @@
     <Compile Include="Migrations\202006031704165_identityFrameworkadd.designer.cs">
       <DependentUpon>202006031704165_identityFrameworkadd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006061741113_NameColumnAddInAccomdationPackages.cs" />
+    <Compile Include="Migrations\202006061741113_NameColumnAddInAccomdationPackages.designer.cs">
+      <DependentUpon>202006061741113_NameColumnAddInAccomdationPackages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006031704165_identityFrameworkadd.resx">
       <DependentUpon>202006031704165_identityFrameworkadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006061741113_NameColumnAddInAccomdationPackages.resx">
+      <DependentUpon>202006061741113_NameColumnAddInAccomdationPackages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

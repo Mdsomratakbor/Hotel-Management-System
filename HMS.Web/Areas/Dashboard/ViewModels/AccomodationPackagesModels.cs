@@ -17,6 +17,7 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     public class AccomodationPackagesModel
     {
         public int ID { get; set; }
+        public string Name { get; set; }
         public int AccomodationTypeID { get; set; }
         public List<AccomodationType> AccomodationType { get; set; }
         public string NoOfRoom { get; set; }
