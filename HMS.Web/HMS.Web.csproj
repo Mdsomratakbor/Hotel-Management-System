@@ -876,6 +876,7 @@
     <Content Include="Areas\Dashboard\Content\plugins\tempusdominus-bootstrap-4\css\tempusdominus-bootstrap-4.min.css" />
     <Content Include="Areas\Dashboard\Content\plugins\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.js" />
     <Content Include="Areas\Dashboard\Content\plugins\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Areas\Dashboard\Views\AccomodationPackages\_Listing.cshtml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -915,7 +916,6 @@
     <Content Include="Areas\Dashboard\Views\AccomodationType\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationType\_Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationPackages\Index.cshtml" />
-    <Content Include="Areas\Dashboard\Views\AccomodationPackages\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationPackages\_Action.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
