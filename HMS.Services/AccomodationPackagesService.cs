@@ -21,7 +21,7 @@ namespace HMS.Services
             var data = _Context.AccomodationPackages.Include(x=>x.AccomodationType).ToList();
             if (string.IsNullOrEmpty(searchTearm) == false)
             {
-                data = data.Where(x => x.AccomodationType.Name.ToLower().Contains(searchTearm.ToLower())).ToList();
+                data = data.Where(x => x.AccomodationType.Name.ToLower().Contains(searchTearm.ToLower())|| x.Name.ToLower().Contains(searchTearm.ToLower())).ToList();
             }
 
             return data.OrderByDescending(x => x.ID).Skip((pageNo.Value - 1) * pageSize).Take(pageSize).ToList();
