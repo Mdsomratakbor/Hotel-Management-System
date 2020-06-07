@@ -921,6 +921,8 @@
     <Content Include="Areas\Dashboard\Views\AccomodationPackages\_Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationPackages\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\AccomodationPackages\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Accomodation\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Accomodation\_Listing.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -971,7 +973,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Models\" />
-    <Folder Include="Areas\Dashboard\Views\Accomodation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
