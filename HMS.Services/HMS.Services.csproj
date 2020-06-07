@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccomodationPackagesService.cs" />
+    <Compile Include="AccomodationService.cs" />
     <Compile Include="AccomodationTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
