@@ -25,12 +25,12 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         {
             return View();
         }
-        public PartialViewResult Listing(string searchTearm, int? pageNo, int? pageSize)
+        public PartialViewResult Listing(string searchTearm,int? AccomodationPackageId, int? pageNo, int? pageSize)
         {
             AccomodationListingModel model = new AccomodationListingModel();
             pageNo = pageNo ?? 1;
             pageSize = pageSize ?? 10;
-            model.Accomodations = _AccomodationService.GetAllAccomodation(searchTearm, pageNo.Value, pageSize.Value);
+            model.Accomodations = _AccomodationService.GetAllAccomodation(searchTearm, AccomodationPackageId.Value, pageNo.Value, pageSize.Value);
             int totalItems = _AccomodationService.TotalItemCount(searchTearm);
             model.Pager = new Pager(totalItems, pageNo, pageSize.Value);
             model.SearchTerm = searchTearm;

@@ -923,6 +923,7 @@
     <Content Include="Areas\Dashboard\Views\AccomodationPackages\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Accomodation\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Accomodation\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Accomodation\_Action.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
