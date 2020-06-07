@@ -635,6 +635,8 @@
     <Content Include="Areas\Dashboard\Content\plugins\overlayScrollbars\js\jquery.overlayScrollbars.min.js" />
     <Content Include="Areas\Dashboard\Content\plugins\overlayScrollbars\js\OverlayScrollbars.js" />
     <Content Include="Areas\Dashboard\Content\plugins\overlayScrollbars\js\OverlayScrollbars.min.js" />
+    <Content Include="Areas\Dashboard\Content\plugins\select2-bootstrap4-theme\select2-bootstrap4.css" />
+    <Content Include="Areas\Dashboard\Content\plugins\select2-bootstrap4-theme\select2-bootstrap4.min.css" />
     <Content Include="Areas\Dashboard\Content\plugins\select2\css\select2.css" />
     <Content Include="Areas\Dashboard\Content\plugins\select2\css\select2.min.css" />
     <Content Include="Areas\Dashboard\Content\plugins\select2\js\i18n\af.js" />
