@@ -197,6 +197,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\AccomodationController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\AccomodationPackagesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\AccomodationTypeController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
@@ -969,6 +970,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Models\" />
+    <Folder Include="Areas\Dashboard\Views\Accomodation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
