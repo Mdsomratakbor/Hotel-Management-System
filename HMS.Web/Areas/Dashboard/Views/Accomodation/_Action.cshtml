@@ -1,1 +1,99 @@
-﻿
+﻿@model HMS.Web.Areas.Dashboard.ViewModels.AccomodationModel
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header  bg-gradient-gray-dark">
+            @if (Model.ID > 0)
+                {
+                <h5 class="modal-title" id="exampleModalLabel">Edit Accomodation Package </h5>
+            }
+            else
+            {
+                <h5 class="modal-title" id="exampleModalLabel">Create Accomodation Package </h5>
+            }
+
+            <button type="button" class="close btn btn-warning btn-sm" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="accomodationPacakgeForm">
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <select name="AccomodationTypeID" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
+
+                        @if (Model.AccomodationTypeID <= 0)
+                        {
+                            <option value="" selected onselect="false">Please select Accomodation Type</option>
+                        }
+                        @foreach (var data in Model.AccomodationType)
+                        {
+                            var selected = data.ID == Model.AccomodationTypeID ? "selected" : string.Empty;
+                            <option value="@data.ID" @selected>@data.Name</option>
+
+                        }
+
+
+                    </select>
+
+                </div>
+
+                <input type="hidden" value="@Model.ID" name="ID" />
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input type="text" autocomplete="off" class="form-control" value="@Model.Name" name="Name" id="Name" placeholder="Enter Accomodation Package Name">
+                </div>
+                <div class="form-group">
+                    <label for="NoOfRoom">No Of Room</label>
+                    <input type="number" autocomplete="off" class="form-control" value="@Model.NoOfRoom" name="NoOfRoom" id="NoOfRoom" placeholder="Enter No Of Room">
+                </div>
+                <div class="form-group">
+                    <label for="FeePerNight">Fee Per Night</label>
+                    <input type="number" autocomplete="off" class="form-control" value="@Model.FeePerNight" name="FeePerNight" id="FeePerNight" placeholder="Enter Fee Per Night">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btnSave">Save</button>
+        </div>
+    </div>
+}
+
+
+<script>
+    //Initialize Select2 Elements
+    $('.select2').select2()
+    $("#btnSave").on('click', function () {
+        $.ajax({
+            method: 'post',
+            url: '@Url.Action("Action","AccomodationPackages")',
+            data: $("#accomodationPacakgeForm").serialize()
+        }).done(function (response) {
+            if (response.Success) {
+                $('#myModal').modal('toggle');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: response.Message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                window.setTimeout(function () {
+                    window.location.reload();
+                }, 1500)
+            }
+            else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: response.Message,
+                    showConfirmButton: true,
+
+                })
+            }
+
+        })
+
+    })
+</script>
