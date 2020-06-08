@@ -9,6 +9,7 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     public class AccomodationListingModel
     {
         public List<Accomodation> Accomodations { get; set; }
+        public List<AccomodationPackage> AccomodatioPackages { get; set; }
         public string SearchTerm { get; set; }
         public int PageSize { get; set; }
         public int PageNo { get; set; }

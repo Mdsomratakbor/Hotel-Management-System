@@ -8,12 +8,21 @@
             </div><!-- /.col -->
         </div><!-- /.row -->
         <div class="input-group">
-            <select id="pageSize">
+            <select id="pageSize" class="form-control">
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
                 <option value="50">50</option>
                 <option value="100">100</option>
+            </select>
+            <select id="accomodationPackage" name="AccomodationPackageID" class="form-control">
+                <option selected disabled>All</option>
+                @foreach (var data in Model.AccomodatioPackages)
+                {
+                    <option value="@data.ID">@data.Name</option>
+
+                }
+
             </select>
             <input type="text" class="form-control" placeholder="search by Accomodation  Name" aria-label="Accomodation  Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm" autocomplete="off">
             <div class="input-group-append">
@@ -30,7 +39,7 @@
                     <tr>
                         <th scope="col">#SL</th>
                         <th scope="col">Name</th>
-                        <th scope="col">AccomodationPackages Name</th>
+                        <th scope="col">Package Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -178,7 +187,7 @@
         var pageSize = $("#pageSize").val();
         $.ajax({
             method: 'Get',
-            url: '@Url.Action("Listing", "AccomodationPackages")',
+            url: '@Url.Action("Listing", "Accomodation")',
             data: { searchTearm: searchText, pageSize: pageSize }
         }).done(function (response) {
             $("#listData").html(response);
@@ -190,7 +199,27 @@
         })
     })
 
+    
 
+    $("#accomodationPackage").change(function () {
+        var searchText = $("#searchText").val();
+        var pageSize = $("#pageSize").val();
+        var accomodationPackageId = $("#accomodationPackage").val();
+        $.ajax({
+            method: 'Get',
+            url: '@Url.Action("Listing", "Accomodation")',
+            data: { searchTearm: searchText, accomodationPackageId: accomodationPackageId, pageSize: pageSize }
+        }).done(function (response) {
+            $("#listData").html(response);
+            $("#pageSize option[selected]").removeAttr("selected");
+            $("#pageSize option[value=" + pageSize + "]").attr("selected", "selected");
+            $("#accomodationPackage option[selected]").removeAttr("selected");
+            $("#accomodationPackage option[value=" + accomodationPackageId + "]").attr("selected", "selected");
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            console.log(thrownError);
+        })
+    })
     $(".datalink").click(function () {
         $.ajax({
             method: 'Get',
