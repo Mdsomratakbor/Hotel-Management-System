@@ -31,26 +31,24 @@
                         <th scope="col">#SL</th>
                         <th scope="col">Name</th>
                         <th scope="col">AccomodationPackages Name</th>
-                        <th scope="col">No Of Room</th>
-                        <th scope="col">Fee Per Night</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.AccomodationPackages != null && Model.AccomodationPackages.Count > 0)
+                    @if (Model != null && Model.Accomodations != null && Model.Accomodations.Count > 0)
             {
-                foreach (var data in Model.AccomodationPackages)
+                foreach (var data in Model.Accomodations)
                 {
                     row = row + 1;
                             <tr>
                                 <th scope="row">@row</th>
                                 <td>@data.Name</td>
-                                <td>@data.AccomodationType.Name</td>
-                                <td>@data.NoOfRoom</td>
-                                <td>@data.FeePerNight</td>
+                                <td>@data.AccomodationPackage.Name</td>
+                                <td>@data.Description</td>
                                 <td width="100">
-                                    <button data-href="@Url.Action("Action", "AccomodationPackages", new { id = data.ID })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
-                                    <button data-href="@Url.Action("Delete", "AccomodationPackages", new { id = data.ID })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    <button data-href="@Url.Action("Action", "Accomodation", new { id = data.ID })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
+                                    <button data-href="@Url.Action("Delete", "Accomodation", new { id = data.ID })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
 
@@ -78,7 +76,7 @@
                 if (Model.Pager.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "AccomodationPackages", new { pageNo = Model.Pager.CurrentPage - 1, pageSize = Model.PageSize })" aria-label="Previous">
+                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Accomodation", new { pageNo = Model.Pager.CurrentPage - 1, pageSize = Model.PageSize })" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -86,12 +84,12 @@
                 for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                 {
                     var activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
-                    <li class="page-item @activeClass"><a class="page-link datalink" style="cursor:pointer" href="#" data-href="@Url.Action("Listing","AccomodationPackages",new {pageNo = page, pageSize = Model.PageSize })">@page</a></li>
+                    <li class="page-item @activeClass"><a class="page-link datalink" style="cursor:pointer" href="#" data-href="@Url.Action("Listing","Accomodation",new {pageNo = page, pageSize = Model.PageSize })">@page</a></li>
                 }
                 if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "AccomodationPackages", new { pageNo = Model.Pager.CurrentPage + 1, pageSize = Model.PageSize })" aria-label="Next">
+                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Accomodation", new { pageNo = Model.Pager.CurrentPage + 1, pageSize = Model.PageSize })" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
