@@ -45,17 +45,17 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             if (id.HasValue)
             {
                 _Accomodation = _AccomodationService.GetAccomodationById(id.Value);
-                //model.ID = _AccomodationService.ID;
-                //model.NoOfRoom = _AccomodationService.NoOfRoom;
-                //model.AccomodationTypeID = _AccomodationService.AccomodationTypeID;
-                //model.FeePerNight = _AccomodationService.FeePerNight;
+                model.ID = _Accomodation.ID;
+                model.Name = _Accomodation.Name;
+                model.AccomodationPackageID = _Accomodation.AccomodationPackageID;
+                model.Description = _Accomodation.Description;
             }
             model.AccomodationPackage = _AccomodationPackagesService.GetAllAccomodationPackage();
 
             return PartialView("_Action", model);
         }
         [HttpPost]
-        public JsonResult Action(AccomodationPackagesModel model)
+        public JsonResult Action(AccomodationModel model)
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -67,21 +67,19 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 {
                     if (model.ID > 0)
                     {
-                        //_Accomodation = _AccomodationService.GetAccomodationById(model.ID);
-                        //_Accomodation.NoOfRoom = model.NoOfRoom;
-                        //_Accomodation.Name = model.Name;
-                        //_Accomodation.FeePerNight = model.FeePerNight;
-                        //_Accomodation.AccomodationTypeID = model.AccomodationTypeID;
-                        //data = _AccomodationService.UpdateAccomodationType(_Accomodation);
+                        _Accomodation = _AccomodationService.GetAccomodationById(model.ID);
+                        _Accomodation.Name = model.Name;
+                        _Accomodation.Description = model.Description;
+                        _Accomodation.AccomodationPackageID = model.AccomodationPackageID;
+                        data = _AccomodationService.UpdateAccomodation(_Accomodation);
                     }
                     else
                     {
-                        //_Accomodation.ID = model.ID;
-                        //_Accomodation.Name = model.Name;
-                        //_Accomodation.NoOfRoom = model.NoOfRoom;
-                        //_Accomodation.FeePerNight = model.FeePerNight;
-                        //_Accomodation.AccomodationTypeID = model.AccomodationTypeID;
-                        //data = _AccomodationService.SaveAccomodationType(_Accomodation);
+                        _Accomodation.ID = model.ID;
+                        _Accomodation.Name = model.Name;
+                        _Accomodation.Description = model.Description;
+                        _Accomodation.AccomodationPackageID = model.AccomodationPackageID;
+                        data = _AccomodationService.SaveAccomodation(_Accomodation);
                     }
 
                 }
