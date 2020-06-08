@@ -17,7 +17,7 @@ namespace HMS.Services
             {
                 _Context = new HMSContext();
             }
-            public List<Accomodation> GetAllAccomodation(string searchTearm, int AccomodationPackageId, int? pageNo, int pageSize = 10)
+            public List<Accomodation> GetAllAccomodation(string searchTearm, int? AccomodationPackageId, int? pageNo, int pageSize = 10)
             {
                 var data = _Context.Accomodations.Include(x => x.AccomodationPackage).ToList();
                 if (string.IsNullOrEmpty(searchTearm) == false)
