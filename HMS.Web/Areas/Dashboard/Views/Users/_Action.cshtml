@@ -3,7 +3,7 @@
 {
     <div class="modal-content">
         <div class="modal-header  bg-gradient-gray-dark">
-            @if (Model.ID > 0)
+            @if (Model.ID != null)
                 {
                 <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
             }
@@ -17,37 +17,37 @@
             </button>
         </div>
         <div class="modal-body">
-            <form id="accomodationForm">
-                <div class="form-group">
-                    <label for="Name">Name</label>
-                    <select name="AccomodationPackageID" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
-
-                        @if (Model.RoleID <= 0)
-                        {
-                            <option value="" selected onselect="false">Please select Accomodation Packages</option>
-                        }
-                        @foreach (var data in Model.AccomodationPackage)
-                        {
-                            var selected = data.ID == Model.AccomodationPackageID ? "selected" : string.Empty;
-                            <option value="@data.ID" @selected>@data.Name</option>
-
-                        }
-
-
-                    </select>
-
-                </div>
+            <form id="userForm">
 
                 <input type="hidden" value="@Model.ID" name="ID" />
                 <div class="form-group">
-                    <label for="Name">Name</label>
-                    <input type="text" autocomplete="off" class="form-control" value="@Model.Name" name="Name" id="Name" placeholder="Enter Accomodation Package Name">
+                    <label for="FullName">Full Name</label>
+                    <input type="text" autocomplete="off" class="form-control" value="@Model.FullName" name="FullName" id="FullName" placeholder="Enter your fullname">
                 </div>
                 <div class="form-group">
-                    <label for="Description">Description</label>
-                    <textarea class="form-control" id="Description" name="Description" rows="3" placeholder="Enter Accomodation Description">@Model.Description</textarea>
+                    <label for="Email">Email</label>
+                    <input type="email" autocomplete="off" class="form-control" value="@Model.Email" name="Email" id="Email" placeholder="Enter your Email">
+                </div>
+                <div class="form-group">
+                    <label for="UserName">UserName</label>
+                    <input type="text" autocomplete="off" class="form-control" value="@Model.UserName" name="UserName" id="UserName" placeholder="Enter your UserName">
+                </div>
+                <div class="form-group">
+                    <label for="Country">Country</label>
+                    <input type="text" autocomplete="off" class="form-control" value="@Model.Country" name="Country" id="Country" placeholder="Enter your Country">
+                </div>
+                <div class="form-group">
+                    <label for="City">City</label>
+                    <input type="text" autocomplete="off" class="form-control" value="@Model.City" name="City" id="City" placeholder="Enter your City">
+                </div>
+                <div class="form-group">
+                    <label for="Address">Address</label>
+                    <textarea class="form-control" id="Address" name="Address" rows="3" placeholder="Enter  Address">@Model.Address</textarea>
                 </div>
             </form>
+        </div>
+        <div class="erroDiv">
+
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -63,8 +63,8 @@
     $("#btnSave").on('click', function () {
         $.ajax({
             method: 'post',
-            url: '@Url.Action("Action","Accomodation")',
-            data: $("#accomodationForm").serialize()
+            url: '@Url.Action("Action","Users")',
+            data: $("#userForm").serialize()
         }).done(function (response) {
             if (response.Success) {
                 $('#myModal').modal('toggle');

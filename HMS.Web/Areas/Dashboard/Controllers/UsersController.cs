@@ -1,10 +1,12 @@
 ﻿using HMS.Entities;
 using HMS.Services;
 using HMS.Web.Areas.Dashboard.ViewModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -68,47 +70,55 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             return PartialView("_Listing", model);
         }
         [HttpGet]
-        public PartialViewResult Action(string id)
+        public async Task<PartialViewResult> Action(string id)
         {
             UserModel model = new UserModel();
-            if (string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id))
             {
-                //_Accomodation = _AccomodationService.GetAccomodationById(id.Value);
-                //model.ID = _Accomodation.ID;
-                //model.Name = _Accomodation.Name;
-                //model.AccomodationPackageID = _Accomodation.AccomodationPackageID;
-                //model.Description = _Accomodation.Description;
+                var user = await UserManager.FindByIdAsync(id);
+                model.ID = user.Id;
+                model.FullName = user.FullName;
+                model.Email = user.Email;
+                model.UserName = user.UserName;
+                model.Address = user.Address;
+                model.Country = user.Country;
+                model.City = user.City;
+                
             }
-           // model.Roles = _AccomodationPackagesService.GetAllAccomodationPackage();
-
             return PartialView("_Action", model);
         }
         [HttpPost]
-        public JsonResult Action(AccomodationModel model)
+        public async Task<JsonResult> Action(UserModel model)
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             var message = "";
-            bool users = false;
+            IdentityResult data = null;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (model.ID > 0)
+                    if (!string.IsNullOrEmpty(model.ID))
                     {
-                        //_Accomodation = _AccomodationService.GetAccomodationById(model.ID);
-                        //_Accomodation.Name = model.Name;
-                        //_Accomodation.Description = model.Description;
-                        //_Accomodation.AccomodationPackageID = model.AccomodationPackageID;
-                        //users = _AccomodationService.UpdateAccomodation(_Accomodation);
+                        var user = await UserManager.FindByIdAsync(model.ID);
+                        user.FullName = model.FullName;
+                        user.Email = model.Email;
+                        user.UserName = model.UserName;
+                        user.Address = model.Address;
+                        user.Country = model.Country;
+                        user.City = model.City;
+                        data = await UserManager.UpdateAsync(user);
                     }
                     else
                     {
-                        //_Accomodation.ID = model.ID;
-                        //_Accomodation.Name = model.Name;
-                        //_Accomodation.Description = model.Description;
-                        //_Accomodation.AccomodationPackageID = model.AccomodationPackageID;
-                        //users = _AccomodationService.SaveAccomodation(_Accomodation);
+                        var user = new HMSUser();
+                        user.FullName = model.FullName;
+                        user.Email = model.Email;
+                        user.UserName = model.UserName;
+                        user.Address = model.Address;
+                        user.Country = model.Country;
+                        user.City = model.City;
+                        data = await UserManager.CreateAsync(user);
                     }
 
                 }
@@ -123,14 +133,14 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 message = ex.Message;
             }
-            if (users)
+            if (data.Succeeded)
             {
                 message = "users Save Successfully!!";
                 result.Data = new { Success = true, Message = message };
             }
             else
             {
-                result.Data = new { Success = false, Message = message };
+                result.Data = new { Success = false, Message = string.Join(",",data.Errors) };
             }
             return result;
 
