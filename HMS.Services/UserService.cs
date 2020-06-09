@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HMS.Services
 {
-    class UserService
+    public class UserService
     { 
     }
 }

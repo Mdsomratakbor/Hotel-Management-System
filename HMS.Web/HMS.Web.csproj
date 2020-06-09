@@ -207,6 +207,7 @@
     <Compile Include="Areas\Dashboard\ViewModels\AccomodationPackagesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccomodationTypeModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\SharedViewModel.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\UserModels.cs" />
     <Compile Include="Areas\Dashboard\Views\Users\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
