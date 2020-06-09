@@ -1,10 +1,10 @@
-﻿@model HMS.Web.Areas.Dashboard.ViewModels.AccomodationListingModel
+﻿@model HMS.Web.Areas.Dashboard.ViewModels.UserListingModel
 @{var row = 0; }
 <div class="card">
     <div class="card-header">
         <div class="row mb-2">
             <div class="col-sm-12">
-                <h3 class="m-0 text-dark">Accomodations</h3>
+                <h3 class="m-0 text-dark">Users</h3>
             </div><!-- /.col -->
         </div><!-- /.row -->
         <div class="input-group">
@@ -15,20 +15,20 @@
                 <option value="50">50</option>
                 <option value="100">100</option>
             </select>
-            <select id="accomodationPackage" name="AccomodationPackageID" class="form-control">
+            <select id="roleID" name="RoleID" class="form-control">
                 <option selected disabled>All</option>
-                @foreach (var data in Model.AccomodatioPackages)
+                @*@foreach (var data in Model.Roles)
                 {
-                    <option value="@data.ID">@data.Name</option>
+                    <option value="@data.Id">@data.Name</option>
 
-                }
+                }*@
 
             </select>
-            <input type="text" class="form-control" placeholder="search by Accomodation  Name" aria-label="Accomodation  Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm" autocomplete="off">
+            <input type="text" class="form-control" placeholder="search by User Name" aria-label="User Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm" autocomplete="off">
             <div class="input-group-append">
-                <button data-href="@Url.Action("Listing", "Accomodation")" id="btnSearch" class="btn btn-outline-warning btn-sm" type="button"><i class="fa fa-search"></i></button>
-                <button data-href="@Url.Action("Listing", "Accomodation")" id="btnReset" class="btn btn-outline-primary btn-sm btn-sm" type="button"><i class="fas fa-sync"></i></button>
-                <button data-href="@Url.Action("Action", "Accomodation")" class="data-btn btn btn-outline-success btn-sm btn-sm" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
+                <button data-href="@Url.Action("Listing", "Users")" id="btnSearch" class="btn btn-outline-warning btn-sm" type="button"><i class="fa fa-search"></i></button>
+                <button data-href="@Url.Action("Listing", "Users")" id="btnReset" class="btn btn-outline-primary btn-sm btn-sm" type="button"><i class="fas fa-sync"></i></button>
+                <button data-href="@Url.Action("Action", "Users")" class="data-btn btn btn-outline-success btn-sm btn-sm" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
             </div>
         </div>
     </div>
@@ -38,26 +38,26 @@
                 <thead>
                     <tr>
                         <th scope="col">#SL</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Package Name</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Email</th>
+                       <th scope="col">Role</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.Accomodations != null && Model.Accomodations.Count > 0)
+                    @if (Model != null && Model.Users != null)
             {
-                foreach (var data in Model.Accomodations)
+                foreach (var data in Model.Users)
                 {
                     row = row + 1;
                             <tr>
                                 <th scope="row">@row</th>
-                                <td>@data.Name</td>
-                                <td>@data.AccomodationPackage.Name</td>
-                                <td>@data.Description</td>
+                                <td>@data.Email</td>
+                                <td>@data.Email</td>
+                                <td>#</td>
                                 <td width="100">
-                                    <button data-href="@Url.Action("Action", "Accomodation", new { id = data.ID })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
-                                    <button data-href="@Url.Action("Delete", "Accomodation", new { id = data.ID })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    <button data-href="@Url.Action("Action", "Users", new { id = data.Id })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
+                                    <button data-href="@Url.Action("Delete", "Users", new { id = data.Id })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
 
@@ -85,7 +85,7 @@
                 if (Model.Pager.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Accomodation", new { pageNo = Model.Pager.CurrentPage - 1, pageSize = Model.PageSize })" aria-label="Previous">
+                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Users", new { pageNo = Model.Pager.CurrentPage - 1, pageSize = Model.PageSize })" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -93,12 +93,12 @@
                 for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                 {
                     var activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
-                    <li class="page-item @activeClass"><a class="page-link datalink" style="cursor:pointer" href="#" data-href="@Url.Action("Listing","Accomodation",new {pageNo = page, pageSize = Model.PageSize })">@page</a></li>
+                    <li class="page-item @activeClass"><a class="page-link datalink" style="cursor:pointer" href="#" data-href="@Url.Action("Listing","Users",new {pageNo = page, pageSize = Model.PageSize })">@page</a></li>
                 }
                 if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Accomodation", new { pageNo = Model.Pager.CurrentPage + 1, pageSize = Model.PageSize })" aria-label="Next">
+                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Users", new { pageNo = Model.Pager.CurrentPage + 1, pageSize = Model.PageSize })" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -187,7 +187,7 @@
         var pageSize = $("#pageSize").val();
         $.ajax({
             method: 'Get',
-            url: '@Url.Action("Listing", "Accomodation")',
+            url: '@Url.Action("Listing", "Users")',
             data: { searchTearm: searchText, pageSize: pageSize }
         }).done(function (response) {
             $("#listData").html(response);
