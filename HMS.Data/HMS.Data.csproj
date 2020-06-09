@@ -73,6 +73,10 @@
     <Compile Include="Migrations\202006061741113_NameColumnAddInAccomdationPackages.designer.cs">
       <DependentUpon>202006061741113_NameColumnAddInAccomdationPackages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006091630250_AddedUserProperties.cs" />
+    <Compile Include="Migrations\202006091630250_AddedUserProperties.designer.cs">
+      <DependentUpon>202006091630250_AddedUserProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006061741113_NameColumnAddInAccomdationPackages.resx">
       <DependentUpon>202006061741113_NameColumnAddInAccomdationPackages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006091630250_AddedUserProperties.resx">
+      <DependentUpon>202006091630250_AddedUserProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

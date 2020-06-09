@@ -80,7 +80,7 @@
     </div>
     <div class="card-footer clearfix">
         <ul class="pagination pagination-sm m-0 float-right">
-            @if (Model.Pager != null )
+            @if (Model.Pager != null && Model.Pager.TotalItems > 10)
             {
                 if (Model.Pager.CurrentPage > 1)
                 {
@@ -109,7 +109,7 @@
 </div>
 
 
-<script>
+<script> 
     $(".data-btn").on('click', function () {
         $.ajax({
             method: 'Get',

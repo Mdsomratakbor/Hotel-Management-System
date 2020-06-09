@@ -57,7 +57,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         {
             UserListingModel model = new UserListingModel();
             pageNo = pageNo ?? 1;
-            pageSize = pageSize ?? 1;
+            pageSize = pageSize ?? 10;
             model.Users = SearchUsers(searchTearm, roleID, pageNo, pageSize.Value);
             model.RoleID = roleID;            
             int totalItems = SearchUsersCount(searchTearm,roleID);
@@ -68,10 +68,10 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             return PartialView("_Listing", model);
         }
         [HttpGet]
-        public PartialViewResult Action(int? id)
+        public PartialViewResult Action(string id)
         {
-            AccomodationModel model = new AccomodationModel();
-            if (id.HasValue)
+            UserModel model = new UserModel();
+            if (string.IsNullOrEmpty(id))
             {
                 //_Accomodation = _AccomodationService.GetAccomodationById(id.Value);
                 //model.ID = _Accomodation.ID;
@@ -79,7 +79,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 //model.AccomodationPackageID = _Accomodation.AccomodationPackageID;
                 //model.Description = _Accomodation.Description;
             }
-            //model.AccomodationPackage = _AccomodationPackagesService.GetAllAccomodationPackage();
+           // model.Roles = _AccomodationPackagesService.GetAllAccomodationPackage();
 
             return PartialView("_Action", model);
         }
