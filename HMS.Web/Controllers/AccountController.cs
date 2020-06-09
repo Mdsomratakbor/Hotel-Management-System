@@ -10,30 +10,31 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HMS.Web.Models;
 using HMS.Entities;
+using HMS.Services;
 
 namespace HMS.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private HMSSignInManagerService _signInManager;
+        private HMSUserManagerService _userManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(HMSUserManagerService userManager, HMSSignInManagerService signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
+        public HMSSignInManagerService SignInManager
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return _signInManager ?? HttpContext.GetOwinContext().Get<HMSSignInManagerService>();
             }
             private set 
             { 
@@ -41,11 +42,11 @@ namespace HMS.Web.Controllers
             }
         }
 
-        public ApplicationUserManager UserManager
+        public HMSUserManagerService UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<HMSUserManagerService>();
             }
             private set
             {
