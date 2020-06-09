@@ -1,4 +1,5 @@
-﻿using HMS.Services;
+﻿using HMS.Entities;
+using HMS.Services;
 using HMS.Web.Areas.Dashboard.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -56,11 +57,10 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         {
             UserListingModel model = new UserListingModel();
             pageNo = pageNo ?? 1;
-            pageSize = pageSize ?? 10;
-            model.Users = UserManager.Users;
-            model.RoleID = roleID;
-            //model.AccomodatioPackages = _AccomodationPackagesService.GetAllAccomodationPackage();
-            int totalItems = 0; //_AccomodationService.TotalItemCount(searchTearm, accomodationPackageId);
+            pageSize = pageSize ?? 1;
+            model.Users = SearchUsers(searchTearm, roleID, pageNo, pageSize.Value);
+            model.RoleID = roleID;            
+            int totalItems = SearchUsersCount(searchTearm,roleID);
             model.Pager = new Pager(totalItems, pageNo, pageSize.Value);
             model.SearchTerm = searchTearm;
             model.PageNo = pageNo.Value;
@@ -89,7 +89,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             var message = "";
-            bool data = false;
+            bool users = false;
             try
             {
                 if (ModelState.IsValid)
@@ -100,7 +100,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         //_Accomodation.Name = model.Name;
                         //_Accomodation.Description = model.Description;
                         //_Accomodation.AccomodationPackageID = model.AccomodationPackageID;
-                        //data = _AccomodationService.UpdateAccomodation(_Accomodation);
+                        //users = _AccomodationService.UpdateAccomodation(_Accomodation);
                     }
                     else
                     {
@@ -108,13 +108,13 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         //_Accomodation.Name = model.Name;
                         //_Accomodation.Description = model.Description;
                         //_Accomodation.AccomodationPackageID = model.AccomodationPackageID;
-                        //data = _AccomodationService.SaveAccomodation(_Accomodation);
+                        //users = _AccomodationService.SaveAccomodation(_Accomodation);
                     }
 
                 }
                 else
                 {
-                    message = "Please enter valid data!!";
+                    message = "Please enter valid users!!";
 
                 }
 
@@ -123,9 +123,9 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 message = ex.Message;
             }
-            if (data)
+            if (users)
             {
-                message = "Data Save Successfully!!";
+                message = "users Save Successfully!!";
                 result.Data = new { Success = true, Message = message };
             }
             else
@@ -141,13 +141,13 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             dynamic message = "";
-            var data = false;
+            var users = false;
             try
             {
                 if (id > 0)
                 {
                     //_Accomodation = _AccomodationService.GetAccomodationById(id);
-                    //data = _AccomodationService.DeleteAccomodation(_Accomodation);
+                    //users = _AccomodationService.DeleteAccomodation(_Accomodation);
                 }
                 else
                 {
@@ -158,9 +158,9 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 message = ex.Message;
             }
-            if (data)
+            if (users)
             {
-                message = "Data Delete Successfully !!";
+                message = "users Delete Successfully !!";
                 result.Data = new { Success = true, Message = message };
             }
             else
@@ -169,6 +169,33 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
 
             return result;
+        }
+
+
+        public IEnumerable<HMSUser> SearchUsers(string searchTearm, string roleId, int? pageNo, int pageSize)
+        {
+            var users = UserManager.Users.AsQueryable();
+            if (string.IsNullOrEmpty(searchTearm) == false)
+            {
+                users = users.Where(x => x.Email.ToLower().Contains(searchTearm.ToLower()));
+            }
+            if (string.IsNullOrEmpty(roleId))
+            {
+                //users = users.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
+            }
+            return users.OrderByDescending(x => x.Email).Skip((pageNo.Value - 1) * pageSize).Take(pageSize);
+        }
+        public int SearchUsersCount(string searchTearm, string roleId)
+        {
+            var data = UserManager.Users;
+            if (string.IsNullOrEmpty(searchTearm) == false)
+            {
+                data = data.Where(x => x.Email.ToLower().Contains(searchTearm.ToLower()));
+            }
+            {
+               // data = data.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
+            }
+            return data.Count();
         }
     }
 }

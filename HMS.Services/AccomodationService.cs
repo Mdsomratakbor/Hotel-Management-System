@@ -41,6 +41,7 @@ namespace HMS.Services
             {
                 data = data.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower())).ToList();
             }
+            if (accomodationPackageId > 0)
             {
                 data = data.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
             }
