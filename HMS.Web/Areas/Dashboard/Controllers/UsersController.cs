@@ -52,12 +52,13 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         {
             return View();
         }
-        public PartialViewResult Listing(string searchTearm, int? accomodationPackageId, int? pageNo, int? pageSize)
+        public PartialViewResult Listing(string searchTearm, string roleID, int? pageNo, int? pageSize)
         {
             UserListingModel model = new UserListingModel();
             pageNo = pageNo ?? 1;
             pageSize = pageSize ?? 10;
             model.Users = UserManager.Users;
+            model.RoleID = roleID;
             //model.AccomodatioPackages = _AccomodationPackagesService.GetAllAccomodationPackage();
             int totalItems = 0; //_AccomodationService.TotalItemCount(searchTearm, accomodationPackageId);
             model.Pager = new Pager(totalItems, pageNo, pageSize.Value);
