@@ -146,18 +146,18 @@ namespace HMS.Web.Areas.Dashboard.Controllers
 
         }
 
-        public JsonResult Delete(int id)
+        public async Task<JsonResult> Delete(string id)
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             dynamic message = "";
-            var users = false;
+            IdentityResult data = null;
             try
             {
-                if (id > 0)
+                if (!string.IsNullOrEmpty(id))
                 {
-                    //_Accomodation = _AccomodationService.GetAccomodationById(id);
-                    //users = _AccomodationService.DeleteAccomodation(_Accomodation);
+                    var user = await UserManager.FindByIdAsync(id);
+                    data = await UserManager.DeleteAsync(user);
                 }
                 else
                 {
@@ -168,14 +168,14 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 message = ex.Message;
             }
-            if (users)
+            if (data.Succeeded)
             {
-                message = "users Delete Successfully !!";
+                message = "User Delete Successfully!!";
                 result.Data = new { Success = true, Message = message };
             }
             else
             {
-                result.Data = new { Success = false, Message = message };
+                result.Data = new { Success = false, Message = string.Join(",", data.Errors) };
             }
 
             return result;
