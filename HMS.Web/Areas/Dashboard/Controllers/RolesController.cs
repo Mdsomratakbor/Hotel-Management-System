@@ -72,23 +72,23 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         [HttpGet]
         public async Task<PartialViewResult> Action(string id)
         {
-            UserModel model = new UserModel();
+            RolesModel model = new RolesModel();
             if (!string.IsNullOrEmpty(id))
             {
-                var user = await UserManager.FindByIdAsync(id);
-                model.ID = user.Id;
-                model.FullName = user.FullName;
-                model.Email = user.Email;
-                model.UserName = user.UserName;
-                model.Address = user.Address;
-                model.Country = user.Country;
-                model.City = user.City;
+                //var user = await UserManager.FindByIdAsync(id);
+                //model.ID = user.Id;
+                //model.FullName = user.FullName;
+                //model.Email = user.Email;
+                //model.UserName = user.UserName;
+                //model.Address = user.Address;
+                //model.Country = user.Country;
+                //model.City = user.City;
 
             }
             return PartialView("_Action", model);
         }
         [HttpPost]
-        public async Task<JsonResult> Action(UserModel model)
+        public async Task<JsonResult> Action(RolesModel model)
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -100,25 +100,25 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 {
                     if (!string.IsNullOrEmpty(model.ID))
                     {
-                        var user = await UserManager.FindByIdAsync(model.ID);
-                        user.FullName = model.FullName;
-                        user.Email = model.Email;
-                        user.UserName = model.UserName;
-                        user.Address = model.Address;
-                        user.Country = model.Country;
-                        user.City = model.City;
-                        data = await UserManager.UpdateAsync(user);
+                        //var user = await UserManager.FindByIdAsync(model.ID);
+                        //user.FullName = model.FullName;
+                        //user.Email = model.Email;
+                        //user.UserName = model.UserName;
+                        //user.Address = model.Address;
+                        //user.Country = model.Country;
+                        //user.City = model.City;
+                        //data = await UserManager.UpdateAsync(user);
                     }
                     else
                     {
-                        var user = new HMSUser();
-                        user.FullName = model.FullName;
-                        user.Email = model.Email;
-                        user.UserName = model.UserName;
-                        user.Address = model.Address;
-                        user.Country = model.Country;
-                        user.City = model.City;
-                        data = await UserManager.CreateAsync(user);
+                        //var user = new HMSUser();
+                        //user.FullName = model.FullName;
+                        //user.Email = model.Email;
+                        //user.UserName = model.UserName;
+                        //user.Address = model.Address;
+                        //user.Country = model.Country;
+                        //user.City = model.City;
+                        //data = await UserManager.CreateAsync(user);
                     }
 
                 }
@@ -193,7 +193,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             //{
             //    //users = users.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
             //}
-            //return users.OrderByDescending(x => x.Email).Skip((pageNo.Value - 1) * pageSize).Take(pageSize);
+            return null;
         }
         public int SearchRolesCount(string searchTearm)
         {

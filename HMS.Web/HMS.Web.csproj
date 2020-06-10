@@ -209,7 +209,6 @@
     <Compile Include="Areas\Dashboard\ViewModels\RolesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\SharedViewModel.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\UserModels.cs" />
-    <Compile Include="Areas\Dashboard\Views\Users\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -931,6 +930,9 @@
     <Content Include="Areas\Dashboard\Views\Users\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Users\_Listing.cshtml" />
     <Content Include="Areas\Dashboard\Views\Users\_Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\_Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -981,7 +983,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Models\" />
-    <Folder Include="Areas\Dashboard\Views\Roles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
