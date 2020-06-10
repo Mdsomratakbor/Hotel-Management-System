@@ -74,6 +74,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             pageNo = pageNo ?? 1;
             pageSize = pageSize ?? 10;
             model.Users = SearchUsers(searchTearm, roleID, pageNo, pageSize.Value);
+            model.Roles = RoleManager.Roles;
             model.RoleID = roleID;            
             int totalItems = SearchUsersCount(searchTearm,roleID);
             model.Pager = new Pager(totalItems, pageNo, pageSize.Value);
@@ -192,6 +193,80 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
 
             return result;
+        }
+
+        [HttpGet]
+        public async Task<PartialViewResult> UserRoles(string id)
+        {
+           
+            UserRolesModel model = new UserRolesModel();
+            if (!string.IsNullOrEmpty(id))
+            {
+                var users = await UserManager.FindByIdAsync(id);
+                model.Roles = RoleManager.Roles;
+                var userRolesIDs = users.Roles.Select(x => x.RoleId).ToList();
+                model.UserRoles = RoleManager.Roles.Where(x => userRolesIDs.Contains(x.Id)).ToList();
+
+            }
+            return PartialView("_UserRoles", model);
+        }
+        [HttpPost]
+        public async Task<JsonResult> UserRoles(UserModel model)
+        {
+            JsonResult result = new JsonResult();
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            var message = "";
+            IdentityResult data = null;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (!string.IsNullOrEmpty(model.ID))
+                    {
+                        var user = await UserManager.FindByIdAsync(model.ID);
+                        user.FullName = model.FullName;
+                        user.Email = model.Email;
+                        user.UserName = model.UserName;
+                        user.Address = model.Address;
+                        user.Country = model.Country;
+                        user.City = model.City;
+                        data = await UserManager.UpdateAsync(user);
+                    }
+                    else
+                    {
+                        var user = new HMSUser();
+                        user.FullName = model.FullName;
+                        user.Email = model.Email;
+                        user.UserName = model.UserName;
+                        user.Address = model.Address;
+                        user.Country = model.Country;
+                        user.City = model.City;
+                        data = await UserManager.CreateAsync(user);
+                    }
+
+                }
+                else
+                {
+                    message = "Please enter valid users!!";
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            if (data.Succeeded)
+            {
+                message = "users Save Successfully!!";
+                result.Data = new { Success = true, Message = message };
+            }
+            else
+            {
+                result.Data = new { Success = false, Message = string.Join(",", data.Errors) };
+            }
+            return result;
+
         }
 
 

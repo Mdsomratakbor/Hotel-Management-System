@@ -17,11 +17,11 @@
             </select>
             <select id="roleID" name="RoleID" class="form-control">
                 <option selected disabled>All</option>
-                @*@foreach (var data in Model.Roles)
+                @foreach (var data in Model.Roles)
                 {
                     <option value="@data.Id">@data.Name</option>
 
-                }*@
+                }
 
             </select>
             <input type="text" class="form-control" placeholder="search by User Name" aria-label="User Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm" autocomplete="off">
@@ -41,8 +41,6 @@
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">User Name</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">City</th>
                         <th scope="col">Address</th>
                         
                        <th scope="col">Role</th>
@@ -60,13 +58,12 @@
                                 <td>@data.FullName</td>
                                 <td>@data.Email</td>
                                 <td>@data.UserName</td>
-                                <td>@data.Country</td>
-                                <td>@data.City</td>
                                 <td>@data.Address</td>
                                 <td>#</td>
-                                <td width="100">
+                                <td width="150">
                                     <button data-href="@Url.Action("Action", "Users", new { id = data.Id })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
                                     <button data-href="@Url.Action("Delete", "Users", new { id = data.Id })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    <button data-href="@Url.Action("UserRoles", "Users", new { id = data.Id })" class="role-btn btn btn-primary btn-sm"><i class="fas fa-users-cog"></i></button>
                                 </td>
                             </tr>
 
