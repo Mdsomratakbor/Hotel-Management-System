@@ -204,6 +204,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 var users = await UserManager.FindByIdAsync(id);
                 model.Roles = RoleManager.Roles;
+                model.UserID = id;
                 var userRolesIDs = users.Roles.Select(x => x.RoleId).ToList();
                 model.UserRoles = RoleManager.Roles.Where(x => userRolesIDs.Contains(x.Id)).ToList();
 
@@ -211,7 +212,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             return PartialView("_UserRoles", model);
         }
         [HttpPost]
-        public async Task<JsonResult> UserRoles(UserModel model)
+        public async Task<JsonResult> AssignUserRoles(string userId, string roleId)
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -219,35 +220,22 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             IdentityResult data = null;
             try
             {
-                if (ModelState.IsValid)
+                if (!string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(roleId))
                 {
-                    if (!string.IsNullOrEmpty(model.ID))
+                    var user = await UserManager.FindByIdAsync(userId);
+                    var role = await RoleManager.FindByIdAsync(roleId);
+                    if(user!= null && role != null)
                     {
-                        var user = await UserManager.FindByIdAsync(model.ID);
-                        user.FullName = model.FullName;
-                        user.Email = model.Email;
-                        user.UserName = model.UserName;
-                        user.Address = model.Address;
-                        user.Country = model.Country;
-                        user.City = model.City;
-                        data = await UserManager.UpdateAsync(user);
+                        data = await UserManager.AddToRoleAsync(userId, role.Name);
                     }
                     else
                     {
-                        var user = new HMSUser();
-                        user.FullName = model.FullName;
-                        user.Email = model.Email;
-                        user.UserName = model.UserName;
-                        user.Address = model.Address;
-                        user.Country = model.Country;
-                        user.City = model.City;
-                        data = await UserManager.CreateAsync(user);
+                        message = "Please enter valid data !!";
                     }
-
                 }
                 else
                 {
-                    message = "Please enter valid users!!";
+                    message = "Please enter valid data !!";
 
                 }
 

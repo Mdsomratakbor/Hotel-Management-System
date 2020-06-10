@@ -17,8 +17,7 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th> Name </th>
-                                <th> Action </th>
+                                <th colspan="2"> Name </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,7 +27,7 @@
                                 {
                                     <tr>
                                         <td>@role.Name</td>
-                                        <td><button data-href="@Url.Action("DeleteUserRoles", "Users", new { id = role.Id })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                                        <td><button data-href="@Url.Action("DeleteUserRoles", "Users", new { userId = Model.UserID, roleId = role.Id  })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-user-times"></i> Delete</button></td>
                                     </tr>
                                 }
                             }
@@ -64,7 +63,7 @@
                                 {
                                     <tr>
                                         <td>@role.Name</td>
-                                        <td><button data-href="@Url.Action("AssignUserRoles", "Users", new { id = role.Id })" class="delete-btn btn btn-success btn-sm"><i class="fas fa-plus"></i> Assign Role</button></td>
+                                        <td><button data-href="@Url.Action("AssignUserRoles", "Users", new {userId = Model.UserID, roleid = role.Id })" class="data-btn btn-success btn-sm"><i class="fas fa-user-check"></i> Assign Role</button></td>
                                     </tr>
                                 }
                             }
@@ -96,13 +95,12 @@
 
 
 <script>
-    //Initialize Select2 Elements
-    $('.select2').select2()
-    $("#btnSave").on('click', function () {
+
+
+    $(".data-btn").on('click', function () {
         $.ajax({
             method: 'post',
-            url: '@Url.Action("Action","Users")',
-            data: $("#userForm").serialize()
+            url: $(this).attr('data-href')
         }).done(function (response) {
             if (response.Success) {
                 $('#myModal').modal('toggle');
