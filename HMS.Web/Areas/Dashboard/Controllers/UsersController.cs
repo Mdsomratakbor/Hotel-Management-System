@@ -75,8 +75,8 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             pageSize = pageSize ?? 10;
             model.Users = SearchUsers(searchTearm, roleID, pageNo, pageSize.Value);
             model.Roles = RoleManager.Roles;
-            model.RoleID = roleID;            
-            int totalItems = SearchUsersCount(searchTearm,roleID);
+            model.RoleID = roleID;
+            int totalItems = SearchUsersCount(searchTearm, roleID);
             model.Pager = new Pager(totalItems, pageNo, pageSize.Value);
             model.SearchTerm = searchTearm;
             model.PageNo = pageNo.Value;
@@ -97,7 +97,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 model.Address = user.Address;
                 model.Country = user.Country;
                 model.City = user.City;
-                
+
             }
             return PartialView("_Action", model);
         }
@@ -154,7 +154,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
             else
             {
-                result.Data = new { Success = false, Message = string.Join(",",data.Errors) };
+                result.Data = new { Success = false, Message = string.Join(",", data.Errors) };
             }
             return result;
 
@@ -198,21 +198,22 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         [HttpGet]
         public async Task<PartialViewResult> UserRoles(string id)
         {
-           
+
             UserRolesModel model = new UserRolesModel();
             if (!string.IsNullOrEmpty(id))
             {
                 var users = await UserManager.FindByIdAsync(id);
-                model.Roles = RoleManager.Roles;
+
                 model.UserID = id;
                 var userRolesIDs = users.Roles.Select(x => x.RoleId).ToList();
                 model.UserRoles = RoleManager.Roles.Where(x => userRolesIDs.Contains(x.Id)).ToList();
-
+                model.Roles = RoleManager.Roles.Where(x => !userRolesIDs.Contains(x.Id));
             }
             return PartialView("_UserRoles", model);
         }
+   
         [HttpPost]
-        public async Task<JsonResult> AssignUserRoles(string userId, string roleId)
+        public async Task<JsonResult> UserRoleOperation( string userId, string roleId, bool isDelete = false)
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -224,9 +225,14 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 {
                     var user = await UserManager.FindByIdAsync(userId);
                     var role = await RoleManager.FindByIdAsync(roleId);
-                    if(user!= null && role != null)
+                    if (user != null && role != null)
                     {
-                        data = await UserManager.AddToRoleAsync(userId, role.Name);
+                        if (!isDelete)
+                            data = await UserManager.AddToRoleAsync(userId, role.Name);
+                        else if (isDelete)
+                            data = await UserManager.RemoveFromRoleAsync(userId, role.Name);
+                        else
+                            message = "Invalid operation";
                     }
                     else
                     {
@@ -246,7 +252,9 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
             if (data.Succeeded)
             {
-                message = "users Save Successfully!!";
+                if (!isDelete) message = "Data Save Successfully!!";
+                else message = "User Role Remove Successfully!!";
+
                 result.Data = new { Success = true, Message = message };
             }
             else
@@ -279,7 +287,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 data = data.Where(x => x.Email.ToLower().Contains(searchTearm.ToLower()));
             }
             {
-               // data = data.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
+                // data = data.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
             }
             return data.Count();
         }

@@ -17,7 +17,7 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th colspan="2"> Name </th>
+                                <th colspan="2"> Current User Roles </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,7 +27,7 @@
                                 {
                                     <tr>
                                         <td>@role.Name</td>
-                                        <td><button data-href="@Url.Action("DeleteUserRoles", "Users", new { userId = Model.UserID, roleId = role.Id  })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-user-times"></i> Delete</button></td>
+                                        <td><button data-href="@Url.Action("UserRoleOperation", "Users", new { userId = Model.UserID, roleId = role.Id, isDelete = true})" class="userRoleOperation btn btn-danger btn-sm"><i class="fas fa-user-times"></i> Delete</button></td>
                                     </tr>
                                 }
                             }
@@ -63,7 +63,7 @@
                                 {
                                     <tr>
                                         <td>@role.Name</td>
-                                        <td><button data-href="@Url.Action("AssignUserRoles", "Users", new {userId = Model.UserID, roleid = role.Id })" class="data-btn btn-success btn-sm"><i class="fas fa-user-check"></i> Assign Role</button></td>
+                                        <td><button data-href="@Url.Action("UserRoleOperation", "Users", new {userId = Model.UserID, roleid = role.Id })" class="userRoleOperation btn-success btn-sm"><i class="fas fa-user-check"></i> Assign Role</button></td>
                                     </tr>
                                 }
                             }
@@ -72,7 +72,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <div class="alert alert-secondary" role="alert">
-                                            This user has no roles exist !!.
+                                             No roles exist !!.
                                         </div>
                                     </td>
                                 </tr>
@@ -97,13 +97,13 @@
 <script>
 
 
-    $(".data-btn").on('click', function () {
+    $(".userRoleOperation").on('click', function () {
         $.ajax({
             method: 'post',
             url: $(this).attr('data-href')
         }).done(function (response) {
             if (response.Success) {
-                $('#myModal').modal('toggle');
+             
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -112,7 +112,12 @@
                     timer: 1500
                 })
                 window.setTimeout(function () {
-                    window.location.reload();
+                    $.ajax({
+                        method: 'Get',
+                        url: '@Url.Action("UserRoles", "Users", new { id = Model.UserID })'
+                    }).done(function (response) {
+                        $("#myModal .modal-dialog").html(response);
+                    })
                 }, 1500)
             }
             else {
