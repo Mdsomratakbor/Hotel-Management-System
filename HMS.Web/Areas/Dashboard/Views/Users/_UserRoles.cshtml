@@ -1,1 +1,133 @@
-﻿
+﻿@model HMS.Web.Areas.Dashboard.ViewModels.UserRolesModel
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header  bg-gradient-gray-dark">
+          
+                <h5 class="modal-title" id="exampleModalLabel">User Roles</h5>
+            
+
+            <button type="button" class="close btn btn-warning btn-sm" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th> Name </th>
+                                <th> Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Roles != null && Model.UserRoles.Count() > 0)
+                            {
+                                foreach (var role in Model.UserRoles)
+                                {
+                                    <tr>
+                                        <td>@role.Name</td>
+                                        <td><button data-href="@Url.Action("DeleteUserRoles", "Users", new { id = role.Id })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="alert alert-secondary" role="alert">
+                                            No roles available !!.
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          
+
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="2"> Assign New Role </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Roles != null && Model.Roles.Count() > 0)
+                            {
+                                foreach (var role in Model.Roles)
+                                {
+                                    <tr>
+                                        <td>@role.Name</td>
+                                        <td><button data-href="@Url.Action("AssignUserRoles", "Users", new { id = role.Id })" class="delete-btn btn btn-success btn-sm"><i class="fas fa-plus"></i> Assign Role</button></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="alert alert-secondary" role="alert">
+                                            This user has no roles exist !!.
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            
+        </div>
+  
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btnSave">Save</button>
+        </div>
+    </div>
+}
+
+
+<script>
+    //Initialize Select2 Elements
+    $('.select2').select2()
+    $("#btnSave").on('click', function () {
+        $.ajax({
+            method: 'post',
+            url: '@Url.Action("Action","Users")',
+            data: $("#userForm").serialize()
+        }).done(function (response) {
+            if (response.Success) {
+                $('#myModal').modal('toggle');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: response.Message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                window.setTimeout(function () {
+                    window.location.reload();
+                }, 1500)
+            }
+            else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: response.Message,
+                    showConfirmButton: true,
+
+                })
+            }
+
+        })
+
+    })
+</script>
