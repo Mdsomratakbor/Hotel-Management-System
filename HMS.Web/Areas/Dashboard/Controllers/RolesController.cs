@@ -182,14 +182,14 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         }
 
 
-        public IEnumerable<IdentityRole> SearchRoles(string searchTearm,  int? pageNo, int pageSize)
+        public List<IdentityRole> SearchRoles(string searchTearm,  int? pageNo, int pageSize)
         {
             var roles = RoleManager.Roles.AsQueryable();
             if (string.IsNullOrEmpty(searchTearm) == false)
             {
-                roles = roles.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower()));
+                roles = roles.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower()) || x.Id.ToLower().Contains(searchTearm.ToLower()));
             }
-            return roles.OrderByDescending(x => x.Name).Skip((pageNo.Value - 1) * pageSize).Take(pageSize);
+            return roles.OrderByDescending(x => x.Name).Skip((pageNo.Value - 1) * pageSize).Take(pageSize).ToList();
         }
         public int SearchRolesCount(string searchTearm)
         {

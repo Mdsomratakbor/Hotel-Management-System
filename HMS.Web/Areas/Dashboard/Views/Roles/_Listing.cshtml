@@ -4,7 +4,7 @@
     <div class="card-header">
         <div class="row mb-2">
             <div class="col-sm-12">
-                <h3 class="m-0 text-dark">Roles</h3>
+                <h3 class="m-0 text-dark font-weight-bold">Roles (@Model.Pager.TotalItems)</h3>
             </div><!-- /.col -->
         </div><!-- /.row -->
         <div class="input-group">
@@ -35,16 +35,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.Roles != null && Model.Roles.Count()>0)
-                 {
-                foreach (var data in Model.Roles)
-                {
-                    row = row + 1;
+                    @if (Model != null && Model.Roles != null && Model.Roles.Count() > 0)
+                    {
+                        foreach (var data in Model.Roles)
+                        {
+                            row = row + 1;
                             <tr>
                                 <th scope="row">@row</th>
                                 <td>@data.Name</td>
-                                <td> 0</td>
-                                <td>#</td>
+                                <td>@data.Users.Count</td>
                                 <td width="100">
                                     <button data-href="@Url.Action("Action", "Roles", new { id = data.Id })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
                                     <button data-href="@Url.Action("Delete", "Roles", new { id = data.Id })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
@@ -99,7 +98,7 @@
 </div>
 
 
-<script> 
+<script>
     $(".data-btn").on('click', function () {
         $.ajax({
             method: 'Get',
@@ -125,7 +124,7 @@
                     method: 'Get',
                     url: $(this).attr('data-href')
                 }).done(function (response) {
-                        if (response.Success) {
+                    if (response.Success) {
                         Swal.fire(
                         'Deleted!',
                         response.Message,
@@ -133,13 +132,15 @@
                         )
                         window.setTimeout(function () {
                             window.location.reload();
-                        }, 1500)}
-                        else {
+                        }, 1500)
+                    }
+                    else {
                         Swal.fire(
                         'Deleted!',
                         response.Message,
                         'warning'
-                        )}
+                        )
+                    }
                 })
             }
         })
@@ -149,11 +150,11 @@
         $.ajax({
             method: 'Get',
             url: $(this).attr('data-href'),
-            data: { searchTearm: searchText, pageNo:'@Model.PageNo', pageSize:'@Model.PageSize' }
+            data: { searchTearm: searchText, pageNo: '@Model.PageNo', pageSize: '@Model.PageSize' }
         }).done(function (response) {
             $("#listData").html(response);
             $("#pageSize option[selected]").removeAttr("selected");
-            $("#pageSize option[value=" + @Model.PageSize + "]").attr("selected","selected");
+            $("#pageSize option[value=" + @Model.PageSize + "]").attr("selected", "selected");
         }).fail(function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
             console.log(thrownError);
@@ -182,7 +183,7 @@
         }).done(function (response) {
             $("#listData").html(response);
             $("#pageSize option[selected]").removeAttr("selected");
-            $("#pageSize option[value=" + pageSize + "]").attr("selected","selected");
+            $("#pageSize option[value=" + pageSize + "]").attr("selected", "selected");
         }).fail(function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
             console.log(thrownError);
@@ -200,4 +201,3 @@
         })
     })
 </script>
-

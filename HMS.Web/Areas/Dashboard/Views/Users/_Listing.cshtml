@@ -4,7 +4,7 @@
     <div class="card-header">
         <div class="row mb-2">
             <div class="col-sm-12">
-                <h3 class="m-0 text-dark">Users</h3>
+                <h3 class="m-0 text-dark font-weight-bold">Users <b class="">(@Model.Pager.TotalItems)</b></h3>
             </div><!-- /.col -->
         </div><!-- /.row -->
         <div class="input-group">
@@ -42,24 +42,26 @@
                         <th scope="col">Email</th>
                         <th scope="col">User Name</th>
                         <th scope="col">Address</th>
-                        
-                       <th scope="col">Role</th>
+                        <th scope="col">Roles</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.Users != null)
+                    @if (Model != null && Model.Users != null && Model.Users.Count()>0)
             {
                 foreach (var data in Model.Users)
                 {
                     row = row + 1;
                             <tr>
-                                <th scope="row">@row</th>
+                                <td scope="row">@row</td>
                                 <td>@data.FullName</td>
                                 <td>@data.Email</td>
                                 <td>@data.UserName</td>
                                 <td>@data.Address</td>
-                                <td>#</td>
+                                <td>
+                                @data.Roles.Count
+                                </td>
+                               
                                 <td width="150">
                                     <button data-href="@Url.Action("Action", "Users", new { id = data.Id })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
                                     <button data-href="@Url.Action("Delete", "Users", new { id = data.Id })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
@@ -73,7 +75,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6">
                                 <div class="alert alert-secondary" role="alert">
                                     Sorry! No record exist.
                                 </div>
@@ -207,20 +209,20 @@
 
     
 
-    $("#accomodationPackage").change(function () {
+    $("#roleID").change(function () {
         var searchText = $("#searchText").val();
         var pageSize = $("#pageSize").val();
-        var accomodationPackageId = $("#accomodationPackage").val();
+        var roleID = $("#roleID").val();
         $.ajax({
             method: 'Get',
-            url: '@Url.Action("Listing", "Accomodation")',
-            data: { searchTearm: searchText, accomodationPackageId: accomodationPackageId, pageSize: pageSize }
+            url: '@Url.Action("Listing", "Users")',
+            data: { searchTearm: searchText, roleID: roleID, pageSize: pageSize }
         }).done(function (response) {
             $("#listData").html(response);
             $("#pageSize option[selected]").removeAttr("selected");
             $("#pageSize option[value=" + pageSize + "]").attr("selected", "selected");
-            $("#accomodationPackage option[selected]").removeAttr("selected");
-            $("#accomodationPackage option[value=" + accomodationPackageId + "]").attr("selected", "selected");
+            $("#roleID option[selected]").removeAttr("selected");
+            $("#roleID option[value=" + roleID + "]").attr("selected", "selected");
         }).fail(function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
             console.log(thrownError);

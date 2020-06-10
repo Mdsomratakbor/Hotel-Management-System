@@ -149,7 +149,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
             if (data.Succeeded)
             {
-                message = "users Save Successfully!!";
+                message = "Data Save Successfully!!";
                 result.Data = new { Success = true, Message = message };
             }
             else
@@ -184,7 +184,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
             if (data.Succeeded)
             {
-                message = "User Delete Successfully!!";
+                message = "Data Delete Successfully!!";
                 result.Data = new { Success = true, Message = message };
             }
             else
@@ -266,18 +266,18 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         }
 
 
-        public IEnumerable<HMSUser> SearchUsers(string searchTearm, string roleId, int? pageNo, int pageSize)
+        public List<HMSUser> SearchUsers(string searchTearm, string roleId, int? pageNo, int pageSize)
         {
             var users = UserManager.Users.AsQueryable();
             if (string.IsNullOrEmpty(searchTearm) == false)
             {
-                users = users.Where(x => x.Email.ToLower().Contains(searchTearm.ToLower()));
+                users = users.Where(x => x.Email.ToLower().Contains(searchTearm.ToLower())|| x.FullName.ToLower().Contains(searchTearm.ToLower()) || x.UserName.ToLower().Contains(searchTearm.ToLower()) || x.Country.ToLower().Contains(searchTearm.ToLower())|| x.City.ToLower().Contains(searchTearm.ToLower()));
             }
-            if (string.IsNullOrEmpty(roleId))
+            if (!string.IsNullOrEmpty(roleId))
             {
-                //users = users.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
+                users = users.Where(x => x.Roles.Select(y=>y.RoleId).Contains(roleId));
             }
-            return users.OrderByDescending(x => x.Email).Skip((pageNo.Value - 1) * pageSize).Take(pageSize);
+            return users.OrderByDescending(x => x.Email).Skip((pageNo.Value - 1) * pageSize).Take(pageSize).ToList();
         }
         public int SearchUsersCount(string searchTearm, string roleId)
         {
