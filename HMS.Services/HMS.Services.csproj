@@ -91,6 +91,7 @@
     <Compile Include="AccomodationPackagesService.cs" />
     <Compile Include="AccomodationService.cs" />
     <Compile Include="AccomodationTypeService.cs" />
+    <Compile Include="HMSRolesManagerService.cs" />
     <Compile Include="HMSSignInManagerService.cs" />
     <Compile Include="HMSUserManagerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
