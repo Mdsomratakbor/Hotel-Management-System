@@ -1,10 +1,10 @@
-﻿@model HMS.Web.Areas.Dashboard.ViewModels.UserListingModel
+﻿@model HMS.Web.Areas.Dashboard.ViewModels.RolesListingModel
 @{var row = 0; }
 <div class="card">
     <div class="card-header">
         <div class="row mb-2">
             <div class="col-sm-12">
-                <h3 class="m-0 text-dark">Users</h3>
+                <h3 class="m-0 text-dark">Roles</h3>
             </div><!-- /.col -->
         </div><!-- /.row -->
         <div class="input-group">
@@ -15,20 +15,11 @@
                 <option value="50">50</option>
                 <option value="100">100</option>
             </select>
-            <select id="roleID" name="RoleID" class="form-control">
-                <option selected disabled>All</option>
-                @*@foreach (var data in Model.Roles)
-                {
-                    <option value="@data.Id">@data.Name</option>
-
-                }*@
-
-            </select>
-            <input type="text" class="form-control" placeholder="search by User Name" aria-label="User Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm" autocomplete="off">
+            <input type="text" class="form-control" placeholder="search by Role Name" aria-label="Role Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm" autocomplete="off">
             <div class="input-group-append">
-                <button data-href="@Url.Action("Listing", "Users")" id="btnSearch" class="btn btn-outline-warning btn-sm" type="button"><i class="fa fa-search"></i></button>
-                <button data-href="@Url.Action("Listing", "Users")" id="btnReset" class="btn btn-outline-primary btn-sm btn-sm" type="button"><i class="fas fa-sync"></i></button>
-                <button data-href="@Url.Action("Action", "Users")" class="data-btn btn btn-outline-success btn-sm btn-sm" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
+                <button data-href="@Url.Action("Listing", "Roles")" id="btnSearch" class="btn btn-outline-warning btn-sm" type="button"><i class="fa fa-search"></i></button>
+                <button data-href="@Url.Action("Listing", "Roles")" id="btnReset" class="btn btn-outline-primary btn-sm btn-sm" type="button"><i class="fas fa-sync"></i></button>
+                <button data-href="@Url.Action("Action", "Roles")" class="data-btn btn btn-outline-success btn-sm btn-sm" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
             </div>
         </div>
     </div>
@@ -38,35 +29,24 @@
                 <thead>
                     <tr>
                         <th scope="col">#SL</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">User Name</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">City</th>
-                        <th scope="col">Address</th>
-                        
-                       <th scope="col">Role</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.Users != null)
+                    @if (Model != null && Model.Roles != null)
             {
-                foreach (var data in Model.Users)
+                foreach (var data in Model.Roles)
                 {
                     row = row + 1;
                             <tr>
                                 <th scope="row">@row</th>
-                                <td>@data.FullName</td>
-                                <td>@data.Email</td>
-                                <td>@data.UserName</td>
-                                <td>@data.Country</td>
-                                <td>@data.City</td>
-                                <td>@data.Address</td>
+                                <td>@data.Name</td>
+
                                 <td>#</td>
                                 <td width="100">
-                                    <button data-href="@Url.Action("Action", "Users", new { id = data.Id })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
-                                    <button data-href="@Url.Action("Delete", "Users", new { id = data.Id })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    <button data-href="@Url.Action("Action", "Roles", new { id = data.Id })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
+                                    <button data-href="@Url.Action("Delete", "Roles", new { id = data.Id })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
 
@@ -94,7 +74,7 @@
                 if (Model.Pager.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Users", new { pageNo = Model.Pager.CurrentPage - 1, pageSize = Model.PageSize })" aria-label="Previous">
+                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Roles", new { pageNo = Model.Pager.CurrentPage - 1, pageSize = Model.PageSize })" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -102,12 +82,12 @@
                 for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                 {
                     var activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
-                    <li class="page-item @activeClass"><a class="page-link datalink" style="cursor:pointer" href="#" data-href="@Url.Action("Listing","Users",new {pageNo = page, pageSize = Model.PageSize })">@page</a></li>
+                    <li class="page-item @activeClass"><a class="page-link datalink" style="cursor:pointer" href="#" data-href="@Url.Action("Listing","Roles",new {pageNo = page, pageSize = Model.PageSize })">@page</a></li>
                 }
                 if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Users", new { pageNo = Model.Pager.CurrentPage + 1, pageSize = Model.PageSize })" aria-label="Next">
+                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "Roles", new { pageNo = Model.Pager.CurrentPage + 1, pageSize = Model.PageSize })" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -196,34 +176,12 @@
         var pageSize = $("#pageSize").val();
         $.ajax({
             method: 'Get',
-            url: '@Url.Action("Listing", "Users")',
+            url: '@Url.Action("Listing", "Roles")',
             data: { searchTearm: searchText, pageSize: pageSize }
         }).done(function (response) {
             $("#listData").html(response);
             $("#pageSize option[selected]").removeAttr("selected");
             $("#pageSize option[value=" + pageSize + "]").attr("selected","selected");
-        }).fail(function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            console.log(thrownError);
-        })
-    })
-
-    
-
-    $("#accomodationPackage").change(function () {
-        var searchText = $("#searchText").val();
-        var pageSize = $("#pageSize").val();
-        var accomodationPackageId = $("#accomodationPackage").val();
-        $.ajax({
-            method: 'Get',
-            url: '@Url.Action("Listing", "Accomodation")',
-            data: { searchTearm: searchText, accomodationPackageId: accomodationPackageId, pageSize: pageSize }
-        }).done(function (response) {
-            $("#listData").html(response);
-            $("#pageSize option[selected]").removeAttr("selected");
-            $("#pageSize option[value=" + pageSize + "]").attr("selected", "selected");
-            $("#accomodationPackage option[selected]").removeAttr("selected");
-            $("#accomodationPackage option[value=" + accomodationPackageId + "]").attr("selected", "selected");
         }).fail(function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
             console.log(thrownError);

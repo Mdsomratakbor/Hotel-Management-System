@@ -17,7 +17,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form id="userForm">
+            <form id="rolesForm">
 
                 <input type="hidden" value="@Model.ID" name="ID" />
                 <div class="form-group">
@@ -40,7 +40,7 @@
         $.ajax({
             method: 'post',
             url: '@Url.Action("Action","Roles")',
-            data: $("#userForm").serialize()
+            data: $("#rolesForm").serialize()
         }).done(function (response) {
             if (response.Success) {
                 $('#myModal').modal('toggle');
