@@ -88,14 +88,10 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             RolesModel model = new RolesModel();
             if (!string.IsNullOrEmpty(id))
             {
-                //var user = await UserManager.FindByIdAsync(id);
-                //model.ID = user.Id;
-                //model.FullName = user.FullName;
-                //model.Email = user.Email;
-                //model.UserName = user.UserName;
-                //model.Address = user.Address;
-                //model.Country = user.Country;
-                //model.City = user.City;
+                var role = await RoleManager.FindByIdAsync(id);
+                model.ID = role.Id;
+                model.Name = role.Name;
+
 
             }
             return PartialView("_Action", model);
@@ -113,25 +109,16 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 {
                     if (!string.IsNullOrEmpty(model.ID))
                     {
-                        //var user = await UserManager.FindByIdAsync(model.ID);
-                        //user.FullName = model.FullName;
-                        //user.Email = model.Email;
-                        //user.UserName = model.UserName;
-                        //user.Address = model.Address;
-                        //user.Country = model.Country;
-                        //user.City = model.City;
-                        //data = await UserManager.UpdateAsync(user);
+                        var role = await RoleManager.FindByIdAsync(model.ID);
+                        role.Name = model.Name;
+                        data = await RoleManager.UpdateAsync(role);
                     }
                     else
                     {
-                        //var user = new HMSUser();
-                        //user.FullName = model.FullName;
-                        //user.Email = model.Email;
-                        //user.UserName = model.UserName;
-                        //user.Address = model.Address;
-                        //user.Country = model.Country;
-                        //user.City = model.City;
-                        //data = await UserManager.CreateAsync(user);
+                        var role = new IdentityRole();
+                        role.Name = model.Name;
+                      
+                        data = await RoleManager.CreateAsync(role);
                     }
 
                 }
@@ -148,7 +135,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
             if (data.Succeeded)
             {
-                message = "users Save Successfully!!";
+                message = "Role Save Successfully!!";
                 result.Data = new { Success = true, Message = message };
             }
             else
@@ -169,12 +156,12 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var user = await UserManager.FindByIdAsync(id);
-                    data = await UserManager.DeleteAsync(user);
+                    var role = await RoleManager.FindByIdAsync(id);
+                    data = await RoleManager.DeleteAsync(role);
                 }
                 else
                 {
-                    message = "Please click valid item";
+                    message = "Role is not valid";
                 }
             }
             catch (Exception ex)

@@ -30,6 +30,7 @@
                     <tr>
                         <th scope="col">#SL</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Users</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -42,7 +43,7 @@
                             <tr>
                                 <th scope="row">@row</th>
                                 <td>@data.Name</td>
-
+                                <td>#</td>
                                 <td>#</td>
                                 <td width="100">
                                     <button data-href="@Url.Action("Action", "Roles", new { id = data.Id })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
