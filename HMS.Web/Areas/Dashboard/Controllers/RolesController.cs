@@ -17,15 +17,17 @@ namespace HMS.Web.Areas.Dashboard.Controllers
     {
         private HMSSignInManagerService _signInManager;
         private HMSUserManagerService _userManager;
+        private HMSRolesManagerService _roleManager;
 
         public RolesController()
         {
         }
 
-        public RolesController(HMSUserManagerService userManager, HMSSignInManagerService signInManager)
+        public RolesController(HMSUserManagerService userManager, HMSSignInManagerService signInManager, HMSRolesManagerService roleManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
 
         public HMSSignInManagerService SignInManager
@@ -49,6 +51,17 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+        public HMSRolesManagerService RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<HMSRolesManagerService>();
+            }
+            private set
+            {
+                _roleManager = value;
             }
         }
         // GET: Dashboard/Users
