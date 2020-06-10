@@ -38,8 +38,13 @@
                 <thead>
                     <tr>
                         <th scope="col">#SL</th>
-                        <th scope="col">User Name</th>
+                        <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Address</th>
+                        
                        <th scope="col">Role</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -52,8 +57,12 @@
                     row = row + 1;
                             <tr>
                                 <th scope="row">@row</th>
+                                <td>@data.FullName</td>
                                 <td>@data.Email</td>
-                                <td>@data.Email</td>
+                                <td>@data.UserName</td>
+                                <td>@data.Country</td>
+                                <td>@data.City</td>
+                                <td>@data.Address</td>
                                 <td>#</td>
                                 <td width="100">
                                     <button data-href="@Url.Action("Action", "Users", new { id = data.Id })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
