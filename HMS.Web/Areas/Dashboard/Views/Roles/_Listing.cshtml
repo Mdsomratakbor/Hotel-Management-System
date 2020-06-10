@@ -34,8 +34,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.Roles != null)
-            {
+                    @if (Model != null && Model.Roles != null && Model.Roles.Count()>0)
+                 {
                 foreach (var data in Model.Roles)
                 {
                     row = row + 1;
@@ -57,7 +57,7 @@
                     {
                         <tr>
                             <td colspan="5">
-                                <div class="alert alert-secondary" role="alert">
+                                <div class="alert alert-dark" role="alert">
                                     Sorry! No record exist.
                                 </div>
                             </td>

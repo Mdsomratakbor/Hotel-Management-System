@@ -197,28 +197,21 @@ namespace HMS.Web.Areas.Dashboard.Controllers
 
         public IEnumerable<IdentityRole> SearchRoles(string searchTearm,  int? pageNo, int pageSize)
         {
-            ////var users = SignInManager.AsQueryable();
-            //if (string.IsNullOrEmpty(searchTearm) == false)
-            //{
-            //    users = users.Where(x => x.Email.ToLower().Contains(searchTearm.ToLower()));
-            //}
-            //if (string.IsNullOrEmpty(roleId))
-            //{
-            //    //users = users.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
-            //}
-            return null;
+            var roles = RoleManager.Roles.AsQueryable();
+            if (string.IsNullOrEmpty(searchTearm) == false)
+            {
+                roles = roles.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower()));
+            }
+            return roles.OrderByDescending(x => x.Name).Skip((pageNo.Value - 1) * pageSize).Take(pageSize);
         }
         public int SearchRolesCount(string searchTearm)
         {
-            var data = UserManager.Users;
+            var roles = RoleManager.Roles.AsQueryable();
             if (string.IsNullOrEmpty(searchTearm) == false)
             {
-                data = data.Where(x => x.Email.ToLower().Contains(searchTearm.ToLower()));
+                roles = roles.Where(x => x.Name.ToLower().Contains(searchTearm.ToLower()));
             }
-            {
-                // data = data.Where(x => x.AccomodationPackageID == accomodationPackageId).ToList();
-            }
-            return data.Count();
+            return roles.Count();
         }
     }
 }
