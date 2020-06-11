@@ -888,6 +888,7 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\flexslider.css" />
     <Content Include="Content\css\icomoon.css" />
+    <Content Include="Content\css\login-css.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\owl.carousel.min.css" />
     <Content Include="Content\css\owl.theme.default.min.css" />

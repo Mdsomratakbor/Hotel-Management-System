@@ -96,7 +96,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 model.UserName = user.UserName;
                 model.Address = user.Address;
                 model.Country = user.Country;
-                model.City = user.City;
+                model.City = user.City;               
 
             }
             return PartialView("_Action", model);
