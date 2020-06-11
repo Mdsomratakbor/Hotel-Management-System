@@ -892,6 +892,7 @@
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\owl.carousel.min.css" />
     <Content Include="Content\css\owl.theme.default.min.css" />
+    <Content Include="Content\css\registration-css.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\flaticon\backup.txt" />
