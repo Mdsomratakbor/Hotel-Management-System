@@ -132,7 +132,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         user.Address = model.Address;
                         user.Country = model.Country;
                         user.City = model.City;
-                        data = await UserManager.CreateAsync(user);
+                        data = await UserManager.CreateAsync(user, model.Password);
                     }
 
                 }
