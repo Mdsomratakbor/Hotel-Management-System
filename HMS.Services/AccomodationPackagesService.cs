@@ -39,21 +39,21 @@ namespace HMS.Services
             }
             return data.Count;
         }
-        public AccomodationPackage GetAccomodationById(int id)
+        public AccomodationPackage GetAccomodationPackagesById(int id)
         {
             return _Context.AccomodationPackages.Find(id);
         }
-        public bool SaveAccomodationType(AccomodationPackage model)
+        public bool SaveAccomodationPackages(AccomodationPackage model)
         {
             _Context.AccomodationPackages.Add(model);
             return _Context.SaveChanges() > 0;
         }
-        public bool UpdateAccomodationType(AccomodationPackage model)
+        public bool UpdateAccomodationPackages(AccomodationPackage model)
         {
             _Context.Entry(model).State = System.Data.Entity.EntityState.Modified;
             return _Context.SaveChanges() > 0;
         }
-        public bool DeleteAccomodationType(AccomodationPackage model)
+        public bool DeleteAccomodationPackages(AccomodationPackage model)
         {
             _Context.Entry(model).State = System.Data.Entity.EntityState.Deleted;
             return _Context.SaveChanges() > 0;

@@ -44,7 +44,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             AccomodationPackagesModel model = new AccomodationPackagesModel();
             if (id.HasValue)
             {
-                _AccomodationPackage = _AccomodationPackagesService.GetAccomodationById(id.Value);
+                _AccomodationPackage = _AccomodationPackagesService.GetAccomodationPackagesById(id.Value);
                 model.ID = _AccomodationPackage.ID;
                 model.NoOfRoom = _AccomodationPackage.NoOfRoom;
                 model.AccomodationTypeID = _AccomodationPackage.AccomodationTypeID;
@@ -67,12 +67,12 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 {
                     if (model.ID > 0)
                     {
-                        _AccomodationPackage = _AccomodationPackagesService.GetAccomodationById(model.ID);
+                        _AccomodationPackage = _AccomodationPackagesService.GetAccomodationPackagesById(model.ID);
                         _AccomodationPackage.NoOfRoom = model.NoOfRoom;
                         _AccomodationPackage.Name = model.Name;
                         _AccomodationPackage.FeePerNight = model.FeePerNight;
                         _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;
-                        data = _AccomodationPackagesService.UpdateAccomodationType(_AccomodationPackage);
+                        data = _AccomodationPackagesService.UpdateAccomodationPackages(_AccomodationPackage);
                     }
                     else
                     {
@@ -81,7 +81,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         _AccomodationPackage.NoOfRoom = model.NoOfRoom;
                         _AccomodationPackage.FeePerNight = model.FeePerNight;
                         _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;
-                        data = _AccomodationPackagesService.SaveAccomodationType(_AccomodationPackage);
+                        data = _AccomodationPackagesService.SaveAccomodationPackages(_AccomodationPackage);
                     }
 
                 }
@@ -119,8 +119,8 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 if (id > 0)
                 {
-                    _AccomodationPackage = _AccomodationPackagesService.GetAccomodationById(id);
-                    data = _AccomodationPackagesService.DeleteAccomodationType(_AccomodationPackage);
+                    _AccomodationPackage = _AccomodationPackagesService.GetAccomodationPackagesById(id);
+                    data = _AccomodationPackagesService.DeleteAccomodationPackages(_AccomodationPackage);
                 }
                 else
                 {
@@ -142,7 +142,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
 
             return result;
-        }
+        } 
 
 
     }
