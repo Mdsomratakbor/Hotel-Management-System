@@ -108,6 +108,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             var user = new HMSUser();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             var message = "";
+            bool isSuccess = false;
             IdentityResult data = null;
             try
             {
@@ -124,6 +125,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         user.Country = model.Country;
                         user.City = model.City;
                         data = await UserManager.UpdateAsync(user);
+                        isSuccess = data.Succeeded;
                     }
                     else
                     {
@@ -135,13 +137,15 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         user.Country = model.Country;
                         user.City = model.City;
                         data = await UserManager.CreateAsync(user, model.Password);
-
+                        isSuccess = data.Succeeded;
                     }
 
                 }
                 else
                 {
-                    message = "Please enter valid users!!";
+                   message = string.Join("; ", ModelState.Values
+                                          .SelectMany(x => x.Errors)
+                                          .Select(x => x.ErrorMessage));
 
                 }
 
@@ -150,7 +154,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 message = ex.Message;
             }
-            if (data.Succeeded)
+            if (isSuccess)
             {
                  await UserManager.AddToRoleAsync(user.Id, "Users");
                 message = "Data Save Successfully!!";
@@ -158,7 +162,8 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
             else
             {
-                result.Data = new { Success = false, Message = string.Join(",", data.Errors) };
+                if(ModelState.IsValid) message = string.Join(",", data.Errors);
+                result.Data = new { Success = false, Message = message };
             }
             return result;
 
