@@ -209,6 +209,7 @@
     <Compile Include="Areas\Dashboard\ViewModels\RolesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\SharedViewModel.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\UserModels.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
