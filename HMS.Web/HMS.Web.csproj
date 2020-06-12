@@ -209,7 +209,6 @@
     <Compile Include="Areas\Dashboard\ViewModels\RolesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\SharedViewModel.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\UserModels.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -219,6 +218,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\HomeViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Dashboard\Content\dist\css\adminlte.css" />
@@ -999,8 +999,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
