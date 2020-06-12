@@ -133,6 +133,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         user.Country = model.Country;
                         user.City = model.City;
                         data = await UserManager.CreateAsync(user, model.Password);
+
                     }
 
                 }
@@ -224,7 +225,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 if (!string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(roleId))
                 {
                     var user = await UserManager.FindByIdAsync(userId);
-                    var role = await RoleManager.FindByIdAsync(roleId);
+                    var role = await RoleManager.FindByIdAsync(roleId); 
                     if (user != null && role != null)
                     {
                         if (!isDelete)
