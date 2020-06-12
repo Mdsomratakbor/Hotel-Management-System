@@ -22,17 +22,19 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     public class UserModel
     {
         public string ID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please Enter Full Name")]      
         public string FullName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please Enter valid Email")]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please Enter User Name")]
         public string UserName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please Enter Country")]
         public string Country { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please Enter City")]
         public string City { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please Enter Address")]
         public string Address { get; set; }
   
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
