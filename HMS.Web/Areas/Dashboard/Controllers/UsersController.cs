@@ -105,6 +105,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         public async Task<JsonResult> Action(UserModel model)
         {
             JsonResult result = new JsonResult();
+            var user = new HMSUser();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             var message = "";
             IdentityResult data = null;
@@ -112,9 +113,10 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                   
                     if (!string.IsNullOrEmpty(model.ID))
                     {
-                        var user = await UserManager.FindByIdAsync(model.ID);
+                         user = await UserManager.FindByIdAsync(model.ID);
                         user.FullName = model.FullName;
                         user.Email = model.Email;
                         user.UserName = model.UserName;
@@ -125,7 +127,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                     }
                     else
                     {
-                        var user = new HMSUser();
+                        
                         user.FullName = model.FullName;
                         user.Email = model.Email;
                         user.UserName = model.UserName;
@@ -150,6 +152,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             }
             if (data.Succeeded)
             {
+                 await UserManager.AddToRoleAsync(user.Id, "Users");
                 message = "Data Save Successfully!!";
                 result.Data = new { Success = true, Message = message };
             }
