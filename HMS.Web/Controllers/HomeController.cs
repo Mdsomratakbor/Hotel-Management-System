@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HMS.Services;
+using HMS.Web.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +10,18 @@ namespace HMS.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private HomeViewModel _HomeViewModel;
+        private AccomodationTypeService _AccomodationTypeService;
+        public HomeController()
+        {
+            _HomeViewModel = new HomeViewModel();
+            _AccomodationTypeService = new AccomodationTypeService();
+        }
         public ActionResult Index()
         {
-            return View();
+            _HomeViewModel.AccomodationTypes = _AccomodationTypeService.GetAllAccomodationType();
+            return View(_HomeViewModel);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
