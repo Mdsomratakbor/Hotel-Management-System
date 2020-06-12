@@ -1019,7 +1019,6 @@
     <Folder Include="Areas\Dashboard\Models\" />
     <Folder Include="fonts\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Views\AccomodationDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1130,6 +1129,7 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\AccomodationDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HMS.Data\HMS.Data.csproj">
