@@ -51,6 +51,10 @@ namespace HMS.Services
         {
             return _Context.Accomodations.Find(id);
         }
+        public List<Accomodation> GetAccomodationByAccomodationPackageId(int id)
+        {
+            return _Context.Accomodations.Where(x=>x.AccomodationPackageID==id).Include(x=>x.AccomodationPackage).ToList();
+        }
         public bool SaveAccomodation(Accomodation model)
         {
             _Context.Accomodations.Add(model);
