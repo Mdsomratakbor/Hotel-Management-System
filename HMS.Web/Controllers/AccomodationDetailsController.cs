@@ -9,7 +9,7 @@ namespace HMS.Web.Controllers
     public class AccomodationDetailsController : Controller
     {
         // GET: AccomodationDetails
-        public ActionResult Index()
+        public ActionResult Index(int accomodationTypeId)
         {
             return View();
         }
