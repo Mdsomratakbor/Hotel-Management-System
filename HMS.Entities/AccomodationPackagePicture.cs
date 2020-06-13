@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace HMS.Entities
 {
-    public class Picture
+    public class AccomodationPackagePicture
     {
-        public int ID { get; set; }
-        public string URL { get; set; }
     }
 }
