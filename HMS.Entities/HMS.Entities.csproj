@@ -63,6 +63,7 @@
     <Compile Include="BaseEntities.cs" />
     <Compile Include="Booking.cs" />
     <Compile Include="HMSUser.cs" />
+    <Compile Include="Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
