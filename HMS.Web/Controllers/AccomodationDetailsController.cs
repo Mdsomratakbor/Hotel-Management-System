@@ -27,8 +27,9 @@ namespace HMS.Web.Controllers
         public  ActionResult Index(int accomodationTypeID, int? accomodationPackageID)
         {
             _model.AccomodationPackages =  _AccomodationPackagesService.GetAccomodationPackageByAccomodationTypeId(accomodationTypeID);
-            var selectedAccomodationPackageId = accomodationPackageID.HasValue? accomodationPackageID.Value:_model.AccomodationPackages.FirstOrDefault().ID;
-            _model.Accomodations = _AccomodationService.GetAccomodationByAccomodationPackageId(selectedAccomodationPackageId);
+            _model.SelctedAccomodationPackageID = accomodationPackageID.HasValue? accomodationPackageID.Value:_model.AccomodationPackages.FirstOrDefault().ID;
+            _model.Accomodations = _AccomodationService.GetAccomodationByAccomodationPackageId(_model.SelctedAccomodationPackageID);
+            _model.AccomodationTypeId = accomodationTypeID;
             return View(_model);
         }
     }

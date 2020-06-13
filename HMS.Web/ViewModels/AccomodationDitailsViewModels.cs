@@ -11,5 +11,7 @@ namespace HMS.Web.ViewModels
         public AccomodationType AccomodationType { get; set; }
         public List<AccomodationPackage> AccomodationPackages { get; set; }
         public List<Accomodation> Accomodations { get; set; }
+        public int SelctedAccomodationPackageID { get; set; }
+        public int AccomodationTypeId { get; set; }
     }
 }

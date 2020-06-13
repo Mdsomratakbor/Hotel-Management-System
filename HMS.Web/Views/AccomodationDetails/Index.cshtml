@@ -23,6 +23,21 @@
 <div id="colorlib-rooms" class="colorlib-light-grey">
     <div class="container">
         <div class="row">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Select Accomodation Package
+                </button>
+                <ul class="dropdown-menu">
+                @foreach (var data in Model.AccomodationPackages)
+                {
+                    <li class="@(data.ID == Model.SelctedAccomodationPackageID?"active":string.Empty )">
+                        <a href="@Url.Action("Index","AccomodationDetails",new { accomodationTypeID = Model.AccomodationTypeId, accomodationPackageID=data.ID })">@data.Name</a>
+                    </li>
+                }
+                </ul>
+                
+
+            </div>
             @if (Model.Accomodations != null & Model.Accomodations.Count > 0)
             {
                 foreach (var accomodation in Model.Accomodations)
