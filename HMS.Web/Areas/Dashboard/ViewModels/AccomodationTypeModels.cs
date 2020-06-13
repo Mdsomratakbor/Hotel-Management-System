@@ -18,7 +18,7 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     public class AccomodationTypeModel
     {
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please provide Accomodation Type Name")]
         public string Name { get; set; }
         public string Description { get; set; }
       
