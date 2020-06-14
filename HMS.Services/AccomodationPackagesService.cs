@@ -43,6 +43,10 @@ namespace HMS.Services
         {
             return _Context.AccomodationPackages.Find(id);
         }
+        public List<AccomodationPackagePictures> GetAccomodationPackagesPictureById(int id)
+        {
+            return _Context.AccomodationPackages.Find(id).AccomodationPackagePictures.ToList();
+        }
         public List<AccomodationPackage> GetAccomodationPackageByAccomodationTypeId(int id)
         {
             return _Context.AccomodationPackages.Where(x => x.AccomodationTypeID == id).ToList();

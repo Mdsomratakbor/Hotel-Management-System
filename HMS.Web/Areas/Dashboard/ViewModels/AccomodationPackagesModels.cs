@@ -22,5 +22,6 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
         public string NoOfRoom { get; set; }
         [Required(ErrorMessage = "Please provide Fee Per Night in this package")]
         public decimal FeePerNight { get; set; }
+        public List<AccomodationPackagePictures> AccomodationPackagePictures { get; set; }
     }
 }

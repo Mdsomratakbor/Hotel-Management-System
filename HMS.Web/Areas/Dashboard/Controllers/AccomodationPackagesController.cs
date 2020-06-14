@@ -53,6 +53,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 model.NoOfRoom = _AccomodationPackage.NoOfRoom;
                 model.AccomodationTypeID = _AccomodationPackage.AccomodationTypeID;
                 model.FeePerNight = _AccomodationPackage.FeePerNight;
+                model.AccomodationPackagePictures = _AccomodationPackagesService.GetAccomodationPackagesPictureById(_AccomodationPackage.ID);
             }
                 model.AccomodationType = _AccomodationTypeService.GetAllAccomodationType();
 
@@ -75,7 +76,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         _AccomodationPackage.NoOfRoom = model.NoOfRoom;
                         _AccomodationPackage.Name = model.Name;
                         _AccomodationPackage.FeePerNight = model.FeePerNight;
-                        _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;
+                        _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;               
                         data = _AccomodationPackagesService.UpdateAccomodationPackages(_AccomodationPackage);
                     }
                     else

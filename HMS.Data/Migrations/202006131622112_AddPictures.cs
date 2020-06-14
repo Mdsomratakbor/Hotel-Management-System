@@ -17,10 +17,10 @@
                         Picture_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Pictures", t => t.Picture_ID)
+                .ForeignKey("dbo.Pictures", t => t.PictuerID)
                 .ForeignKey("dbo.AccomodationPackages", t => t.AccomodationPackageID, cascadeDelete: true)
                 .Index(t => t.AccomodationPackageID)
-                .Index(t => t.Picture_ID);
+                .Index(t => t.PictuerID);
             
             CreateTable(
                 "dbo.Pictures",
@@ -41,22 +41,22 @@
                         Picture_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Pictures", t => t.Picture_ID)
+                .ForeignKey("dbo.Pictures", t => t.PictuerID)
                 .ForeignKey("dbo.Accomodations", t => t.AccomodationID, cascadeDelete: true)
                 .Index(t => t.AccomodationID)
-                .Index(t => t.Picture_ID);
+                .Index(t => t.PictuerID);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.AccomodationPictures", "AccomodationID", "dbo.Accomodations");
-            DropForeignKey("dbo.AccomodationPictures", "Picture_ID", "dbo.Pictures");
+            DropForeignKey("dbo.AccomodationPictures", "PictuerID", "dbo.Pictures");
             DropForeignKey("dbo.AccomodationPackagePictures", "AccomodationPackageID", "dbo.AccomodationPackages");
-            DropForeignKey("dbo.AccomodationPackagePictures", "Picture_ID", "dbo.Pictures");
-            DropIndex("dbo.AccomodationPictures", new[] { "Picture_ID" });
+            DropForeignKey("dbo.AccomodationPackagePictures", "PictuerID", "dbo.Pictures");
+            DropIndex("dbo.AccomodationPictures", new[] { "PictuerID" });
             DropIndex("dbo.AccomodationPictures", new[] { "AccomodationID" });
-            DropIndex("dbo.AccomodationPackagePictures", new[] { "Picture_ID" });
+            DropIndex("dbo.AccomodationPackagePictures", new[] { "PictuerID" });
             DropIndex("dbo.AccomodationPackagePictures", new[] { "AccomodationPackageID" });
             DropTable("dbo.AccomodationPictures");
             DropTable("dbo.Pictures");
