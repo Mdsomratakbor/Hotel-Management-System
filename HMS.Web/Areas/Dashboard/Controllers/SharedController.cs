@@ -42,7 +42,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                     var dbPictuer = new Picture();
                     dbPictuer.URL = fileName;
                     int pictureID = _SharedService.SavePicture(dbPictuer);
-                    pictuerJSON.Add(new { ID = pictureID, pictureURL = dbPictuer.URL });
+                    pictuerJSON.Add(new { ID = pictureID, URL = dbPictuer.URL });
 
                 }
                 result.Data = new { Success = true, pictuerJSON };
