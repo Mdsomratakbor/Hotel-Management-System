@@ -17,11 +17,13 @@ namespace HMS.Services
         }
         public int SavePicture(Picture picture)
         {
-
             _Context.Pictures.Add(picture);
             _Context.SaveChanges();
-             return picture.ID;
-            
+             return picture.ID;        
+        }
+        public List<Picture> GetPicturesByIDs(List<int> pictureIDs)
+        {
+            return pictureIDs.Select(x => _Context.Pictures.Find(x)).ToList();
         }
     }
 }
