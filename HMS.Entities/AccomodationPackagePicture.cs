@@ -12,5 +12,6 @@ namespace HMS.Entities
         public int AccomodationPackageID { get; set; }
         public int PictuerID { get; set; }
         public virtual Picture Picture { get; set; }
+
     }
 }

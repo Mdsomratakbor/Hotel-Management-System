@@ -53,7 +53,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 model.NoOfRoom = _AccomodationPackage.NoOfRoom;
                 model.AccomodationTypeID = _AccomodationPackage.AccomodationTypeID;
                 model.FeePerNight = _AccomodationPackage.FeePerNight;
-                model.AccomodationPackagePictures = _AccomodationPackagesService.GetAccomodationPackagesPictureById(_AccomodationPackage.ID);
+                model.AccomodationPackagePictures = _AccomodationPackage.AccomodationPackagePictures;
             }
                 model.AccomodationType = _AccomodationTypeService.GetAllAccomodationType();
 

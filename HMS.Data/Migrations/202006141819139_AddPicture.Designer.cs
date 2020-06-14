@@ -7,13 +7,13 @@ namespace HMS.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddPictures : IMigrationMetadata
+    public sealed partial class AddPicture : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPictures));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPicture));
         
         string IMigrationMetadata.Id
         {
-            get { return "202006131622112_AddPictures"; }
+            get { return "202006141819139_AddPicture"; }
         }
         
         string IMigrationMetadata.Source
