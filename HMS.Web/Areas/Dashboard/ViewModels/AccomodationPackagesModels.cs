@@ -14,7 +14,7 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     }
     public class AccomodationPackagesModel : BaseClass
     {
-
+        public string PictureIDs { get; set; }
         [Required(ErrorMessage = "Please provide Accomodation Type")]
         public int AccomodationTypeID { get; set; }
         public List<AccomodationType> AccomodationType { get; set; }
