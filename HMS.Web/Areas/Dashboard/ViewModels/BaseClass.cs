@@ -12,4 +12,4 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
         [Required(ErrorMessage = "Please provide  Name")]
         public string Name { get; set; }
     }
-}
+} 
