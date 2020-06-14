@@ -7,13 +7,10 @@ using System.Web;
 
 namespace HMS.Web.Areas.Dashboard.ViewModels
 {
-    public class AccomodationPackagesListingModel
+    public class AccomodationPackagesListingModel :Pagination
     {
         public List<AccomodationPackage> AccomodationPackages { get; set; }
-        public string SearchTerm { get; set; }
-        public int PageSize { get; set; }
-        public int PageNo { get; set; }
-        public Pager Pager { get; set; }
+   
     }
     public class AccomodationPackagesModel
     {

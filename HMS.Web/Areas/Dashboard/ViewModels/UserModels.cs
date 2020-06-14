@@ -8,15 +8,11 @@ using System.Web;
 
 namespace HMS.Web.Areas.Dashboard.ViewModels
 {
-    public class UserListingModel
+    public class UserListingModel :Pagination
     {
         public IEnumerable<HMSUser> Users { get; set; }
         public string RoleID { get; set; }
         public IEnumerable<IdentityRole> Roles { get; set; }
-        public string SearchTerm { get; set; }
-        public int PageSize { get; set; }
-        public int PageNo { get; set; }
-        public Pager Pager { get; set; }
 
     }
     public class UserModel

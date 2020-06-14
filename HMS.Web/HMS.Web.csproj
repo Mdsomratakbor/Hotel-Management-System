@@ -206,6 +206,7 @@
     <Compile Include="Areas\Dashboard\ViewModels\AccomodationModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccomodationPackagesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccomodationTypeModels.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\Pagination.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\RolesModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\SharedViewModel.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\UserModels.cs" />
