@@ -12,11 +12,9 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
         public List<AccomodationPackage> AccomodationPackages { get; set; }
    
     }
-    public class AccomodationPackagesModel
+    public class AccomodationPackagesModel : BaseClass
     {
-        public int ID { get; set; }
-        [Required (ErrorMessage ="Please provide Accomodation Package Name")]
-        public string Name { get; set; }
+
         [Required(ErrorMessage = "Please provide Accomodation Type")]
         public int AccomodationTypeID { get; set; }
         public List<AccomodationType> AccomodationType { get; set; }

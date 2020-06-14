@@ -11,11 +11,8 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     {
         public List<AccomodationType> AccomodationTypes { get; set; }
     }
-    public class AccomodationTypeModel
+    public class AccomodationTypeModel :BaseClass
     {
-        public int ID { get; set; }
-        [Required(ErrorMessage ="Please provide Accomodation Type Name")]
-        public string Name { get; set; }
         public string Description { get; set; }
       
     }
