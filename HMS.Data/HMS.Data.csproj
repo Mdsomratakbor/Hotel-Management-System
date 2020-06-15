@@ -61,39 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HMSContext.cs" />
-    <Compile Include="Migrations\202006031632205_BasicEntities.cs" />
-    <Compile Include="Migrations\202006031632205_BasicEntities.designer.cs">
-      <DependentUpon>202006031632205_BasicEntities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006031704165_identityFrameworkadd.cs" />
-    <Compile Include="Migrations\202006031704165_identityFrameworkadd.designer.cs">
-      <DependentUpon>202006031704165_identityFrameworkadd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006061741113_NameColumnAddInAccomdationPackages.cs" />
-    <Compile Include="Migrations\202006061741113_NameColumnAddInAccomdationPackages.designer.cs">
-      <DependentUpon>202006061741113_NameColumnAddInAccomdationPackages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006091630250_AddedUserProperties.cs" />
-    <Compile Include="Migrations\202006091630250_AddedUserProperties.designer.cs">
-      <DependentUpon>202006091630250_AddedUserProperties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006141759103_202006131622112_AddPictures.cs" />
-    <Compile Include="Migrations\202006141759103_202006131622112_AddPictures.Designer.cs">
-      <DependentUpon>202006141759103_202006131622112_AddPictures.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006141809356_202006131622112_AddPictures.cs" />
-    <Compile Include="Migrations\202006141809356_202006131622112_AddPictures.Designer.cs">
-      <DependentUpon>202006141809356_202006131622112_AddPictures.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006141815362_AddPicture.cs" />
-    <Compile Include="Migrations\202006141815362_AddPicture.Designer.cs">
-      <DependentUpon>202006141815362_AddPicture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006141819139_AddPicture.cs" />
-    <Compile Include="Migrations\202006141819139_AddPicture.Designer.cs">
-      <DependentUpon>202006141819139_AddPicture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,32 +72,6 @@
       <Project>{677D9125-1531-4360-9782-2DF8EB3C0A5C}</Project>
       <Name>HMS.Entities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006031632205_BasicEntities.resx">
-      <DependentUpon>202006031632205_BasicEntities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006031704165_identityFrameworkadd.resx">
-      <DependentUpon>202006031704165_identityFrameworkadd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006061741113_NameColumnAddInAccomdationPackages.resx">
-      <DependentUpon>202006061741113_NameColumnAddInAccomdationPackages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006091630250_AddedUserProperties.resx">
-      <DependentUpon>202006091630250_AddedUserProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006141759103_202006131622112_AddPictures.resx">
-      <DependentUpon>202006141759103_202006131622112_AddPictures.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006141809356_202006131622112_AddPictures.resx">
-      <DependentUpon>202006141809356_202006131622112_AddPictures.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006141815362_AddPicture.resx">
-      <DependentUpon>202006141815362_AddPicture.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006141819139_AddPicture.resx">
-      <DependentUpon>202006141819139_AddPicture.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

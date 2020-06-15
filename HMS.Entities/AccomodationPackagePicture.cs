@@ -10,7 +10,9 @@ namespace HMS.Entities
     {
         public int ID { get; set; }
         public int AccomodationPackageID { get; set; }
+        public int Pictuer_ID { get; set; }
         public int PictuerID { get; set; }
+      
         public virtual Picture Picture { get; set; }
 
     }
