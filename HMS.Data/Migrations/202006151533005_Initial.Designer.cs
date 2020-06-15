@@ -13,7 +13,7 @@ namespace HMS.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202006150435000_Initial"; }
+            get { return "202006151533005_Initial"; }
         }
         
         string IMigrationMetadata.Source

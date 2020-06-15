@@ -61,9 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HMSContext.cs" />
-    <Compile Include="Migrations\202006150435000_Initial.cs" />
-    <Compile Include="Migrations\202006150435000_Initial.designer.cs">
-      <DependentUpon>202006150435000_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202006151533005_Initial.cs" />
+    <Compile Include="Migrations\202006151533005_Initial.designer.cs">
+      <DependentUpon>202006151533005_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,8 +79,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006150435000_Initial.resx">
-      <DependentUpon>202006150435000_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006151533005_Initial.resx">
+      <DependentUpon>202006151533005_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

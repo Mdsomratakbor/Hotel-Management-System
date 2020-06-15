@@ -13,10 +13,10 @@
                     {
                         ID = c.Int(nullable: false, identity: true),
                         AccomodationPackageID = c.Int(nullable: false),
-                        PictuerID = c.Int(),
+                        PictuerID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Pictures", t => t.PictuerID)
+                .ForeignKey("dbo.Pictures", t => t.PictuerID, cascadeDelete: true)
                 .ForeignKey("dbo.AccomodationPackages", t => t.AccomodationPackageID, cascadeDelete: true)
                 .Index(t => t.AccomodationPackageID)
                 .Index(t => t.PictuerID);
@@ -60,10 +60,10 @@
                     {
                         ID = c.Int(nullable: false, identity: true),
                         AccomodationID = c.Int(nullable: false),
-                        PictuerID = c.Int(),
+                        PictuerID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Pictures", t => t.PictuerID)
+                .ForeignKey("dbo.Pictures", t => t.PictuerID, cascadeDelete: true)
                 .ForeignKey("dbo.Accomodations", t => t.AccomodationID, cascadeDelete: true)
                 .Index(t => t.AccomodationID)
                 .Index(t => t.PictuerID);
@@ -177,10 +177,10 @@
             DropForeignKey("dbo.Bookings", "AccomodationID", "dbo.Accomodations");
             DropForeignKey("dbo.AccomodationPictures", "AccomodationID", "dbo.Accomodations");
             DropForeignKey("dbo.Accomodations", "AccomodationPackageID", "dbo.AccomodationPackages");
-            DropForeignKey("dbo.AccomodationPictures", "PictureID", "dbo.Pictures");
+            DropForeignKey("dbo.AccomodationPictures", "PictuerID", "dbo.Pictures");
             DropForeignKey("dbo.AccomodationPackages", "AccomodationTypeID", "dbo.AccomodationTypes");
             DropForeignKey("dbo.AccomodationPackagePictures", "AccomodationPackageID", "dbo.AccomodationPackages");
-            DropForeignKey("dbo.AccomodationPackagePictures", "PictureID", "dbo.Pictures");
+            DropForeignKey("dbo.AccomodationPackagePictures", "PictuerID", "dbo.Pictures");
             DropIndex("dbo.UserLogin", new[] { "UserId" });
             DropIndex("dbo.UserClaim", new[] { "UserId" });
             DropIndex("dbo.User", "UserNameIndex");
@@ -189,10 +189,10 @@
             DropIndex("dbo.Role", "RoleNameIndex");
             DropIndex("dbo.Bookings", new[] { "AccomodationID" });
             DropIndex("dbo.Accomodations", new[] { "AccomodationPackageID" });
-            DropIndex("dbo.AccomodationPictures", new[] { "PictureID" });
+            DropIndex("dbo.AccomodationPictures", new[] { "PictuerID" });
             DropIndex("dbo.AccomodationPictures", new[] { "AccomodationID" });
             DropIndex("dbo.AccomodationPackages", new[] { "AccomodationTypeID" });
-            DropIndex("dbo.AccomodationPackagePictures", new[] { "PictureID" });
+            DropIndex("dbo.AccomodationPackagePictures", new[] { "PictuerID" });
             DropIndex("dbo.AccomodationPackagePictures", new[] { "AccomodationPackageID" });
             DropTable("dbo.UserLogin");
             DropTable("dbo.UserClaim");
