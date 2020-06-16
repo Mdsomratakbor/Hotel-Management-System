@@ -79,6 +79,8 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         _Accomodation.Name = model.Name;
                         _Accomodation.Description = model.Description;
                         _Accomodation.AccomodationPackageID = model.AccomodationPackageID;
+                        _Accomodation.AccomodationPictures.Clear();
+                        _Accomodation.AccomodationPictures.AddRange(pictures.Select(x => new AccomodationPictures() { PictuerID = x.ID, AccomodationID = model.ID }));            
                         data = _AccomodationService.UpdateAccomodation(_Accomodation);
                     }
                     else

@@ -62,8 +62,14 @@ namespace HMS.Services
         }
         public bool UpdateAccomodation(Accomodation model)
         {
-            _Context.Entry(model).State = System.Data.Entity.EntityState.Modified;
-            return _Context.SaveChanges() > 0;
+            using (var context = new HMSContext()) {
+                var existingAccomodation = context.Accomodations.Where(x=>x.ID == model.ID).Include(y=>y.AccomodationPictures).FirstOrDefault();
+                context.AccomodationPictures.RemoveRange(existingAccomodation.AccomodationPictures);
+                context.Entry(existingAccomodation).CurrentValues.SetValues(model);
+                context.AccomodationPictures.AddRange(model.AccomodationPictures);
+                return context.SaveChanges() > 0;
+            }
+            
         }
         public bool DeleteAccomodation(Accomodation model)
         {
