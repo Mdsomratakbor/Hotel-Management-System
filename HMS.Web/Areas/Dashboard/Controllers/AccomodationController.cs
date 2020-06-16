@@ -54,6 +54,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                 model.Name = _Accomodation.Name;
                 model.AccomodationPackageID = _Accomodation.AccomodationPackageID;
                 model.Description = _Accomodation.Description;
+                model.AccomodationPictures = _Accomodation.AccomodationPictures;
             }
             model.AccomodationPackage = _AccomodationPackagesService.GetAllAccomodationPackage();
 

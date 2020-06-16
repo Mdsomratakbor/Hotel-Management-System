@@ -49,7 +49,7 @@ namespace HMS.Services
         }
         public Accomodation GetAccomodationById(int id)
         {
-            return _Context.Accomodations.Find(id);
+            return _Context.Accomodations.Where(x=>x.ID == id).Include(z=>z.AccomodationPictures.Select(w=>w.Picture)).FirstOrDefault();
         }
         public List<Accomodation> GetAccomodationByAccomodationPackageId(int id)
         {
