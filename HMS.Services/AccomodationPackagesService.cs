@@ -55,11 +55,15 @@ namespace HMS.Services
         }
         public bool UpdateAccomodationPackages(AccomodationPackage model)
         {
-            var existingAccomodationPackage = _Context.AccomodationPackages.Find(model.ID);
-            _Context.AccomodationPackagePictures.RemoveRange(existingAccomodationPackage.AccomodationPackagePictures);
-            _Context.AccomodationPackagePictures.AddRange(existingAccomodationPackage.AccomodationPackagePictures);
-            _Context.Entry(existingAccomodationPackage).CurrentValues.SetValues(model);
-            return _Context.SaveChanges() > 0;
+            using (var context = new HMSContext())
+            {
+                var existingAccomodationPackage = context.AccomodationPackages.Find(model.ID);
+                context.AccomodationPackagePictures.RemoveRange(existingAccomodationPackage.AccomodationPackagePictures);
+                context.Entry(existingAccomodationPackage).CurrentValues.SetValues(model);
+                context.AccomodationPackagePictures.AddRange(model.AccomodationPackagePictures);
+                return context.SaveChanges() > 0;
+            }
+           
         }
         public bool DeleteAccomodationPackages(AccomodationPackage model)
         {
@@ -67,5 +71,5 @@ namespace HMS.Services
             return _Context.SaveChanges() > 0;
         }
 
-    }
+    } 
 }

@@ -82,8 +82,8 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                         _AccomodationPackage.Name = model.Name;
                         _AccomodationPackage.FeePerNight = model.FeePerNight;
                         _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;
-                        _AccomodationPackage.AccomodationPackagePictures = new List<AccomodationPackagePictures>();
-                        _AccomodationPackage.AccomodationPackagePictures.AddRange(pictures.Select(x => new AccomodationPackagePictures() { PictuerID = x.ID }));
+                        _AccomodationPackage.AccomodationPackagePictures.Clear();
+                        _AccomodationPackage.AccomodationPackagePictures.AddRange(pictures.Select(x => new AccomodationPackagePictures() { PictuerID = x.ID, AccomodationPackageID = model.ID }));
                         data = _AccomodationPackagesService.UpdateAccomodationPackages(_AccomodationPackage);
                     }
                     else
