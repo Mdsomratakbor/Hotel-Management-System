@@ -41,7 +41,7 @@ namespace HMS.Services
         }
         public AccomodationPackage GetAccomodationPackagesById(int id)
         {
-            return _Context.AccomodationPackages.Where(x=>x.ID == id).Include(y=>y.AccomodationPackagePictures).Include(z=>z.AccomodationPackagePictures).FirstOrDefault();
+            return _Context.AccomodationPackages.Where(x=>x.ID == id).Include(y=>y.AccomodationPackagePictures).Include(z=>z.AccomodationPackagePictures.Select(w=>w.Picture)).FirstOrDefault();
         }
 
         public List<AccomodationPackage> GetAccomodationPackageByAccomodationTypeId(int id)
@@ -55,7 +55,10 @@ namespace HMS.Services
         }
         public bool UpdateAccomodationPackages(AccomodationPackage model)
         {
-            _Context.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            var existingAccomodationPackage = _Context.AccomodationPackages.Find(model.ID);
+            _Context.AccomodationPackagePictures.RemoveRange(existingAccomodationPackage.AccomodationPackagePictures);
+            _Context.AccomodationPackagePictures.AddRange(existingAccomodationPackage.AccomodationPackagePictures);
+            _Context.Entry(existingAccomodationPackage).CurrentValues.SetValues(model);
             return _Context.SaveChanges() > 0;
         }
         public bool DeleteAccomodationPackages(AccomodationPackage model)

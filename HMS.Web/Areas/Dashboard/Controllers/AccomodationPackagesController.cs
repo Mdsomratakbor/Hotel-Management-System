@@ -50,6 +50,7 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 _AccomodationPackage = _AccomodationPackagesService.GetAccomodationPackagesById(id.Value);
                 model.ID = _AccomodationPackage.ID;
+                model.Name = _AccomodationPackage.Name;
                 model.NoOfRoom = _AccomodationPackage.NoOfRoom;
                 model.AccomodationTypeID = _AccomodationPackage.AccomodationTypeID;
                 model.FeePerNight = _AccomodationPackage.FeePerNight;
@@ -70,19 +71,23 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    List<int> picturesIDs = model.PictureIDs.Split(',').Select(x => int.Parse(x)).ToList();
+                    var pictures = _SharedService.GetPicturesByIDs(picturesIDs);
+                
                     if (model.ID > 0)
                     {
+
                         _AccomodationPackage = _AccomodationPackagesService.GetAccomodationPackagesById(model.ID);
                         _AccomodationPackage.NoOfRoom = model.NoOfRoom;
                         _AccomodationPackage.Name = model.Name;
                         _AccomodationPackage.FeePerNight = model.FeePerNight;
-                        _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;               
+                        _AccomodationPackage.AccomodationTypeID = model.AccomodationTypeID;
+                        _AccomodationPackage.AccomodationPackagePictures = new List<AccomodationPackagePictures>();
+                        _AccomodationPackage.AccomodationPackagePictures.AddRange(pictures.Select(x => new AccomodationPackagePictures() { PictuerID = x.ID }));
                         data = _AccomodationPackagesService.UpdateAccomodationPackages(_AccomodationPackage);
                     }
                     else
                     {
-                        List<int> picturesIDs = model.PictureIDs.Split(',').Select(x => int.Parse(x)).ToList();
-                        var pictures = _SharedService.GetPicturesByIDs(picturesIDs);
                         _AccomodationPackage.AccomodationPackagePictures = new List<AccomodationPackagePictures>();
                         _AccomodationPackage.AccomodationPackagePictures.AddRange(pictures.Select(x => new AccomodationPackagePictures() { PictuerID = x.ID }));
                         _AccomodationPackage.ID = model.ID;
