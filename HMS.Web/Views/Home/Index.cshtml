@@ -169,6 +169,7 @@
 </div>
 
 @if (Model.AccomodationTypes != null && Model.AccomodationTypes.Count > 0) {
+    var i = 0;
 <div id="colorlib-rooms" class="colorlib-light-grey">
     <div class="container">
         <div class="row">
@@ -179,14 +180,14 @@
                 <p>
                     @foreach(var data in Model.AccomodationTypes)
                     {
-                        <button class="btn btn-sm btn-info" data-id="@data.ID">@data.Name</button>
+                        <button class="btn btn-sm btn-info changeAccomodationType" data-id="@data.ID">@data.Name</button>
                     }
                 </p>
             </div>
         </div>
         @foreach (var data in Model.AccomodationTypes)
         {
-            <div class="row">
+            <div data-id="@data.ID" class="row accomodationTypesRow" style="@(i!=0?"display:none":string.Empty)">
                 <div class="col-md-12 animate-box">
                     <div class="owl-carousel owl-carousel2">
                         @foreach (var accomodationPackage in Model.AccomodtionPackages.Where(x=>x.AccomodationTypeID==data.ID))
@@ -208,6 +209,7 @@
                     <a href="#">View all rooms <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
+            i++;
         }
       
     </div>
