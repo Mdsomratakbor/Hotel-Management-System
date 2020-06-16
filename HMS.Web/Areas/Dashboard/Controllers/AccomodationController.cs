@@ -14,11 +14,15 @@ namespace HMS.Web.Areas.Dashboard.Controllers
         private AccomodationService _AccomodationService;
         private Accomodation _Accomodation;
         private AccomodationPackagesService _AccomodationPackagesService;
+        private SharedService _SharedService;
+        private Picture _Picture;
         public AccomodationController()
         {
             _AccomodationPackagesService = new AccomodationPackagesService();
             _AccomodationService = new AccomodationService();
             _Accomodation = new Accomodation();
+            _Picture = new Picture();
+            _SharedService = new SharedService();
         }
         // GET: Dashboard/AccomodationType
         public ActionResult Index()
@@ -66,6 +70,8 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    List<int> picturesIDs = model.PictureIDs.Split(',').Select(x => int.Parse(x)).ToList();
+                    var pictures = _SharedService.GetPicturesByIDs(picturesIDs);
                     if (model.ID > 0)
                     {
                         _Accomodation = _AccomodationService.GetAccomodationById(model.ID);
@@ -76,6 +82,8 @@ namespace HMS.Web.Areas.Dashboard.Controllers
                     }
                     else
                     {
+                        _Accomodation.AccomodationPictures = new List<AccomodationPictures>();
+                        _Accomodation.AccomodationPictures.AddRange(pictures.Select(x => new AccomodationPictures() { PictuerID = x.ID }));
                         _Accomodation.ID = model.ID;
                         _Accomodation.Name = model.Name;
                         _Accomodation.Description = model.Description;

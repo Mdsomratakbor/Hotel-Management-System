@@ -15,10 +15,12 @@ namespace HMS.Web.Areas.Dashboard.ViewModels
     }
     public class AccomodationModel : BaseClass
     {
-      
+
+        public string PictureIDs { get; set; }
         [Required(ErrorMessage ="Please Provide Accomodation Package")]
         public int AccomodationPackageID { get; set; }
         public List<AccomodationPackage> AccomodationPackage { get; set; }
         public string Description { get; set; }
+        public List<AccomodationPictures> AccomodationPictures { get; set; }
     }
 }

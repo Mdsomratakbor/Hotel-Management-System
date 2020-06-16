@@ -47,6 +47,20 @@
                     <label for="Description">Description</label>
                     <textarea class="form-control" id="Description" name="Description" rows="3" placeholder="Enter Accomodation Description">@Model.Description</textarea>
                 </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Pictures</label>
+                    <input id="selectFile" type="file" class="form-control-file" multiple>
+                </div>
+                <div class="form-group" id="pictureArea">
+                    @if (Model.AccomodationPictures != null && Model.AccomodationPictures.Count > 0)
+                    {
+                        foreach (var picture in Model.AccomodationPictures)
+                        {
+                            <img src="/Content/images/AccomodationPackage/@picture.Picture.URL" class="img-fluid img-thumbnail" style="width:200px; height:200px; cursor:pointer; border:1px solid black" onclick="removeMe(this)" data-id="@picture.PictuerID" />
+                        }
+                    }
+                    <input type="hidden" id="pictueIDs" name="PictureIDs" />
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -55,12 +69,21 @@
         </div>
     </div>
 }
+<div id="imageTemplate">
+    <img src="" class="img-fluid" style="width:200px;" onclick="removeMe(this)" />
+</div>
 
 
 <script>
     //Initialize Select2 Elements
     $('.select2').select2()
     $("#btnSave").on('click', function () {
+        var imageIDs = [];
+        $("#pictureArea img").each(function () {
+            var imageID = $(this).attr("data-id");
+            imageIDs.push(imageID);
+        });
+        $("#pictueIDs").val(imageIDs.join());
         $.ajax({
             method: 'post',
             url: '@Url.Action("Action","Accomodation")',
@@ -92,4 +115,35 @@
         })
 
     })
+    $("#selectFile").on("change", function () {
+        var pictures = this.files;
+        var formData = new FormData();
+        for (var i = 0; i < pictures.length; i++) {
+            formData.append("Picture ", pictures[i]);
+        }
+        $.ajax({
+            method: 'Post',
+            url: '@Url.Action("UploadPicture", "Shared")',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false
+        }).done(function (response) {
+            for (var i = 0; i < response.pictuerJSON.length; i++) {
+                var picture = response.pictuerJSON[i];
+                var $imgHTML = $("#imageTemplate").clone();
+                $imgHTML.find('img').attr('src', '/Content/images/AccomodationPackage/' + picture.URL).addClass('img-thumbnail').css({ 'cursor': 'pointer', 'height': 200, 'border': '1px solid black' });
+                $imgHTML.find('img').attr('data-id', picture.ID);
+                $("#pictureArea").append($imgHTML.html());
+            }
+
+        }).fail(function (xhr, status, error) {
+            alert("Some error");
+            console.log(error);
+        })
+
+    })
+    function removeMe(element) {
+        element.remove();
+    }
 </script>
