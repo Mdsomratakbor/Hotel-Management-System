@@ -24,6 +24,9 @@ namespace HMS.Web.Areas.Dashboard.Controllers
             return View();
         }
 
+     
+
+
         
         public JsonResult UploadPicture()
         {

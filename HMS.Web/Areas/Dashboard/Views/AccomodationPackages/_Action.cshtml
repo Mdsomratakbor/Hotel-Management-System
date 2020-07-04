@@ -1,0 +1,155 @@
+﻿
+@model HMS.Web.Areas.Dashboard.ViewModels.AccomodationPackagesModel
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header  bg-gradient-gray-dark">
+            @if (Model.ID > 0)
+                {
+                <h5 class="modal-title" id="exampleModalLabel">Edit Accomodation Package </h5>
+            }
+            else
+            {
+                <h5 class="modal-title" id="exampleModalLabel">Create Accomodation Package </h5>
+            }
+
+            <button type="button" class="close btn btn-warning btn-sm" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="accomodationPacakgeForm">
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <select name="AccomodationTypeID" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
+
+                        @if (Model.AccomodationTypeID <= 0)
+                        {
+                            <option value="" selected onselect="false">Please select Accomodation Type</option>
+                        }
+                        @foreach (var data in Model.AccomodationType)
+                        {
+                            var selected = data.ID == Model.AccomodationTypeID ? "selected" : string.Empty;
+                            <option value="@data.ID" @selected>@data.Name</option>
+
+                        }
+
+
+                    </select>
+
+                </div>
+                
+                <input type="hidden" value="@Model.ID" name="ID" /> 
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input type="text" autocomplete="off" class="form-control" value="@Model.Name" name="Name" id="Name" placeholder="Enter Accomodation Package Name">
+                </div>
+                <div class="form-group">
+                    <label for="NoOfRoom">No Of Room</label>
+                    <input type="number" autocomplete="off" class="form-control" value="@Model.NoOfRoom" name="NoOfRoom" id="NoOfRoom" placeholder="Enter No Of Room">
+                </div>
+                <div class="form-group">
+                    <label for="FeePerNight">Fee Per Night</label>
+                    <input type="number" autocomplete="off" class="form-control" value="@Model.FeePerNight" name="FeePerNight" id="FeePerNight" placeholder="Enter Fee Per Night">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Pictures</label>
+                    <input id="selectFile" type="file" class="form-control-file"  multiple>
+                </div>
+                <div class="form-group" id="pictureArea">
+                    @if (Model.AccomodationPackagePictures != null && Model.AccomodationPackagePictures.Count > 0)
+                    {
+                        foreach (var picture in Model.AccomodationPackagePictures)
+                        {
+                            <img src="/Content/images/AccomodationPackage/@picture.Picture.URL" class="img-fluid img-thumbnail" style="width:200px; height:200px; cursor:pointer; border:1px solid black" onclick="removeMe(this)" data-id="@picture.PictuerID"/>
+                        }
+                    }
+                    <input type="hidden" id="pictueIDs" name="PictureIDs" />
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+            <button type="button" class="btn btn-danger" id="btnSave"><i class="fas fa-save"></i> Save</button>
+        </div>
+    </div>
+}
+<div id="imageTemplate">
+    <img src=""  class="img-fluid" style="width:200px;" onclick="removeMe(this)"/>
+</div>
+
+
+<script>
+    //Initialize Select2 Elements
+    $('.select2').select2()
+    $("#btnSave").on('click', function () {
+        var imageIDs = [];
+        $("#pictureArea img").each(function () {
+            var imageID = $(this).attr("data-id");
+            imageIDs.push(imageID);
+        });
+        $("#pictueIDs").val(imageIDs.join());
+        $.ajax({
+            method: 'post',
+            url: '@Url.Action("Action","AccomodationPackages")',
+            data: $("#accomodationPacakgeForm").serialize()
+        }).done(function (response) {
+            if (response.Success) {
+                $('#myModal').modal('toggle');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: response.Message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                window.setTimeout(function () {
+                    window.location.reload();
+                }, 1500)
+            }
+            else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: response.Message,
+                    showConfirmButton: true,
+
+                })
+            }
+
+        })
+
+    })
+
+    $("#selectFile").on("change", function () {
+        var pictures = this.files;
+        var formData = new FormData();
+        for (var i = 0; i < pictures.length; i++) {
+            formData.append("Picture ",pictures[i]);
+        }
+        $.ajax({
+            method:'Post',
+            url: '@Url.Action("UploadPicture", "Shared")',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType:false
+        }).done(function (response) {
+            for (var i = 0; i < response.pictuerJSON.length; i++) {
+                var picture = response.pictuerJSON[i];
+                var $imgHTML = $("#imageTemplate").clone();
+                $imgHTML.find('img').attr('src', '/Content/images/AccomodationPackage/' + picture.URL).addClass('img-thumbnail').css({ 'cursor': 'pointer', 'height': 200, 'border': '1px solid black' });
+                $imgHTML.find('img').attr('data-id',picture.ID );
+                $("#pictureArea").append($imgHTML.html());
+            }
+
+        }).fail(function (xhr, status, error) {
+            alert("Some error");
+            console.log(error);
+        })
+
+    })
+    function removeMe(element) {
+        element.remove();
+    }
+</script>

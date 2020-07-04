@@ -1,0 +1,207 @@
+﻿@model HMS.Web.Areas.Dashboard.ViewModels.AccomodationPackagesListingModel
+@{var row = 0; }
+<div class="card">
+    <div class="card-header">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h3 class="m-0 text-dark">Accomodation Packages</h3>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+        <div class="input-group">
+            <select id="pageSize">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <input type="text" class="form-control" placeholder="search by Accomodation Type Name" aria-label="Accomodation Type Name" aria-describedby="basic-addon2" id="searchText" value="@Model.SearchTerm" autocomplete="off">
+            <div class="input-group-append">
+                <button data-href="@Url.Action("Listing", "AccomodationPackages")" id="btnSearch" class="btn btn-outline-warning btn-sm" type="button"><i class="fa fa-search"></i></button>
+                <button data-href="@Url.Action("Listing", "AccomodationPackages")" id="btnReset" class="btn btn-outline-primary btn-sm btn-sm" type="button"><i class="fas fa-sync"></i></button>
+                <button data-href="@Url.Action("Action", "AccomodationPackages")" class="data-btn btn btn-outline-success btn-sm btn-sm" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div style="height: 300px; overflow: auto;">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#SL</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">AccomodationType Name</th>
+                        <th scope="col">No Of Room</th>
+                        <th scope="col">Fee Per Night</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.AccomodationPackages != null && Model.AccomodationPackages.Count > 0)
+            {
+                foreach (var data in Model.AccomodationPackages)
+                {
+                    row = row + 1;
+                            <tr>
+                                <th scope="row">@row</th>
+                                <td>@data.Name</td>
+                                <td>@data.AccomodationType.Name</td>
+                                <td>@data.NoOfRoom</td>
+                                <td>@data.FeePerNight</td>
+                                <td width="100">
+                                    <button data-href="@Url.Action("Action", "AccomodationPackages", new { id = data.ID })" class="data-btn btn btn-success btn-sm"><i class="far fa-edit"></i></button>
+                                    <button data-href="@Url.Action("Delete", "AccomodationPackages", new { id = data.ID })" class="delete-btn btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+
+                        }
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">
+                                <div class="alert alert-secondary" role="alert">
+                                    Sorry! No record exist.
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            @if (Model.Pager != null && Model.Pager.TotalItems > 10)
+            {
+                if (Model.Pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "AccomodationPackages", new { pageNo = Model.Pager.CurrentPage - 1, pageSize = Model.PageSize })" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                }
+                for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    var activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
+                    <li class="page-item @activeClass"><a class="page-link datalink" style="cursor:pointer" href="#" data-href="@Url.Action("Listing","AccomodationPackages",new {pageNo = page, pageSize = Model.PageSize })">@page</a></li>
+                }
+                if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link datalink" style="cursor:pointer" data-href="@Url.Action("Listing", "AccomodationPackages", new { pageNo = Model.Pager.CurrentPage + 1, pageSize = Model.PageSize })" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    $(".data-btn").on('click', function () {
+        $.ajax({
+            method: 'Get',
+            url: $(this).attr('data-href')
+        }).done(function (response) {
+            $('#myModal').modal('toggle');
+            $("#myModal .modal-dialog").html(response);
+        })
+    })
+    $(".delete-btn").on('click', function () {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    method: 'Get',
+                    url: $(this).attr('data-href')
+                }).done(function (response) {
+                        if (response.Success) {
+                        Swal.fire(
+                        'Deleted!',
+                        response.Message,
+                        'success'
+                        )
+                        window.setTimeout(function () {
+                            window.location.reload();
+                        }, 1500)}
+                        else {
+                        Swal.fire(
+                        'Deleted!',
+                        response.Message,
+                        'warning'
+                        )}
+                })
+            }
+        })
+    })
+    $("#btnSearch").click(function () {
+        var searchText = $("#searchText").val();
+        $.ajax({
+            method: 'Get',
+            url: $(this).attr('data-href'),
+            data: { searchTearm: searchText, pageNo:'@Model.PageNo', pageSize:'@Model.PageSize' }
+        }).done(function (response) {
+            $("#listData").html(response);
+            $("#pageSize option[selected]").removeAttr("selected");
+            $("#pageSize option[value=" + @Model.PageSize + "]").attr("selected","selected");
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            console.log(thrownError);
+        })
+    })
+    $("#btnReset").click(function () {
+        var searchText = $("#searchText").val();
+        $.ajax({
+            method: 'Get',
+            url: $(this).attr('data-href')
+        }).done(function (response) {
+            $("#listData").html(response);
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            console.log(thrownError);
+        })
+    })
+
+    $("#pageSize").change(function () {
+        var searchText = $("#searchText").val();
+        var pageSize = $("#pageSize").val();
+        $.ajax({
+            method: 'Get',
+            url: '@Url.Action("Listing", "AccomodationPackages")',
+            data: { searchTearm: searchText, pageSize: pageSize }
+        }).done(function (response) {
+            $("#listData").html(response);
+            $("#pageSize option[selected]").removeAttr("selected");
+            $("#pageSize option[value=" + pageSize + "]").attr("selected","selected");
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            console.log(thrownError);
+        })
+    })
+     
+
+    $(".datalink").click(function () {
+        $.ajax({
+            method: 'Get',
+            url: $(this).attr('data-href'),
+        }).done(function (response) {
+            $("#listData").html(response);
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            console.log(thrownError);
+        })
+    })
+</script>
